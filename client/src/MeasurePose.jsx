@@ -81,6 +81,9 @@ function MeasuerPose({  }) {
           ref={webcamRef}
           draggable={true}
         />
+        {
+          faceDetected
+          ? <>
         <h1>
         {
           !!((faceW / shoulderW) - straightRatio > maxStraightRange)
@@ -117,6 +120,9 @@ function MeasuerPose({  }) {
           />
         </div>
         </div>
+          </>
+          : <h1>얼굴이 감지되지 않았습니다</h1>
+        }
       </div>
     )
 }
