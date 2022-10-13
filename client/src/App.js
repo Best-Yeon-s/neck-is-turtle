@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import MeasuerPose from './MeasurePose';
+import MeasuerPose from './MeasurePoseTest';
+import Home from './components/home';
 
 function App() {
   return (
     <div className="App">
-      <MeasuerPose />
+      {/* <MeasuerPose /> */}
+      <Home />
     </div>
   );
 }

@@ -1,0 +1,9 @@
+@import '../../style/var.scss';
+
+.home {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: $BK;
+    display: flex;
+}
