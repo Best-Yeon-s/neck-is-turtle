@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import WebCam from "react-webcam";
 import { Pose } from '@mediapipe/pose';
 import { Camera } from '@mediapipe/camera_utils';
+import './MeasurePose.scss';
 
 let camera;
 
@@ -11,9 +12,6 @@ function MeasuerPose({  }) {
     const [faceDetected, setFaceDetected] = useState(false);
     const [faceW, setFaceW] = useState(0);
     const [shoulderW, setShoulderW] = useState(0);
-
-    const [straightRatio, setStraightRatio] = useState(0.42);
-    const [maxStraightRange, setMaxStraightRange] = useState(0.08);
     const [neckDegree, setNeckDegree] = useState(0);
 
     const getDistance = (p1, p2) => {
@@ -37,12 +35,14 @@ function MeasuerPose({  }) {
         setShoulderW(Math.round(shoulderWidth * 100));
         // console.log(shoulderWidth);
 
+        // let p = results.poseLandmarks[7];
+        // console.log(Math.round(p.x*100), Math.round(p.y*100), Math.round(p.z*100));
 
         const faceMidPoint = getMidPoint(results.poseLandmarks[7], results.poseLandmarks[8]);
         const shoulderMidPoint = getMidPoint(results.poseLandmarks[11], results.poseLandmarks[12]);
         const neckDirectionVector = getDirectionVector(faceMidPoint, shoulderMidPoint);
-        console.log(-Math.asin(neckDirectionVector.z / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
-        setNeckDegree(-Math.asin(neckDirectionVector.z / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
+        console.log(Math.asin(Math.abs(neckDirectionVector.z) / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
+        setNeckDegree(Math.asin(Math.abs(neckDirectionVector.z) / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
       } else {
         setFaceDetected(false);
         console.log('얼굴 감지되지 않음');
@@ -86,13 +86,8 @@ function MeasuerPose({  }) {
       <div className="webcam-container"
         style={{marginTop: '30px'}}
       >
-        <div className="show-webcam-toggle"
-          onClick={()=>{setHideCam(!hideCam)}}
-        >
-        </div>
         <WebCam 
           autio={"false"}
-          height={300}
           ref={webcamRef}
           draggable={true}
         />
@@ -111,35 +106,6 @@ function MeasuerPose({  }) {
           : "바른 자세입니다"
         }
         </h1>
-
-        <div className="">
-          <h3>측정값</h3>
-            <div>얼굴 너비 : { faceW }</div>
-            <div>어깨 너비 : { shoulderW }</div>
-            <div>얼굴/어깨 : { (faceW / shoulderW).toFixed(3) }</div>
-            <div>기준값 - 측정값 : { ((faceW / shoulderW) - straightRatio).toFixed(3) }</div>
-        </div>
-
-        <div className="">
-          <h3>설정값</h3>
-          <div>바른 자세 기준값(얼굴/어깨) : { straightRatio.toFixed(3) }</div>
-          <button
-            onClick={()=>{setStraightRatio(faceW / shoulderW)}}
-          >
-            현재 값으로 기준값 재설정
-          </button>
-        <div>
-          <label>바른 자세 최대 비율 차이 : </label>
-          <input
-            type="number"
-            min="0"
-            max="1"
-            step="0.01"
-            value={maxStraightRange}
-            onChange={(e)=>{setMaxStraightRange(e.currentTarget.value)}}
-          />
-        </div>
-        </div>
           </>
           : <h1>얼굴이 감지되지 않았습니다</h1>
         }

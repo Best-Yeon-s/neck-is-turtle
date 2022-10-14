@@ -1,0 +1,81 @@
+@import '../../../style/var.scss';
+
+.dashboard {
+    width: calc(100% - rem(280) - rem(100));
+    flex-grow: 1;
+    margin-top: rem(40);
+    border-radius: rem(20) 0 0 0;
+    background: $IV;
+    padding: rem(50);
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+
+    .today-chart {
+        width: rem(400);
+        height: rem(300);
+
+        .today-status-wrapper {
+            display: flex;
+            align-items: center;
+
+            .today-status-chart {
+                width: rem(280);
+                height: rem(280);
+            }
+
+            .today-status {
+                width: rem(100);
+                font-size: rem(16);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: rem(10);
+
+                .straight-percent {
+                    font-size: rem(50);
+                    font-weight: 700;
+                    color: $GN-4;
+
+                    span {
+                        font-size: rem(14);
+                        // font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    .pose-graph {
+        width: 100%;
+        height: calc(100% - rem(350) - rem(20));
+        flex-grow: 1;
+
+        .pose-graph-chart {
+            width: 100%;
+            max-height: 100%;
+
+            canvas {
+                width: auto !important;
+                height: 300px !important;
+                max-height: calc(100% - rem(1000)) !important;
+                max-width: 100% !important;
+            }
+        }
+    }
+
+    .chart-wrapper {
+        .chart-title {
+            text-align: left;
+            font-weight: 600;
+            font-size: rem(18);
+            padding: 10px;
+        }
+    }
+
+    .today-webcam-wrapper {
+        height: rem(350);
+        display: flex;
+        gap: rem(20);
+    }
+}

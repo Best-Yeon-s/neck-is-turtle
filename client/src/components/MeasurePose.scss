@@ -1,0 +1,11 @@
+@import '../style/var.scss';
+
+.webcam-container {
+    flex-grow: 1;
+    position: relative;
+
+    video {
+        height: 100%;
+        border-radius: rem(10);
+    }
+}
