@@ -1,10 +1,8 @@
 import { TodayChart } from './TodayChart';
-import './index.scss';
 import MeasuerPose from '../../MeasurePose';
 import PoseGraph from './PoseGraph';
 import PostureCalendar from './PostureCalendar';
-import MyResponsivePie from './TodayPieChart';
-import MyResponsiveTimeRange from './CalendarChart';
+import './index.scss';
 
 function Dashboard() {
 

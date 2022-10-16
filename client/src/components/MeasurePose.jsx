@@ -10,7 +10,6 @@ let camera;
 
 function MeasuerPose({  }) {
     const webcamRef = useRef();
-    const [hideCam, setHideCam] = useState(false);
     const [faceDetected, setFaceDetected] = useState(false);
     const [faceW, setFaceW] = useState(0);
     const [shoulderW, setShoulderW] = useState(0);
@@ -35,7 +34,7 @@ function MeasuerPose({  }) {
     }, [neckDegree])
 
     const onResults = (results) => {
-      if (results.poseLandmarks?.length) {
+      if (results.poseLandmarks?.length || !results.poseLandmarks[7]) {
         setFaceDetected(true);
         setStatus('NOT_DETECTED');
         const faceWidth = getDistance(results.poseLandmarks[7], results.poseLandmarks[8]);
@@ -138,7 +137,8 @@ function MeasuerPose({  }) {
             </>
             : <div className="post-not-detected">
               <BsFillExclamationTriangleFill />
-              <span>자세가 감지되지 않았습니다</span>
+              <div className="warning-title">자세가 감지되지 않습니다</div>
+              <div>화면에 얼굴이 잘 나오는 지 확인해주세요</div>
             </div>
           }
         </div>

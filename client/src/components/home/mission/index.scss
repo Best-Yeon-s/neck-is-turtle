@@ -1,0 +1,61 @@
+@import '../../../style/var.scss';
+
+.mission-container {
+    width: calc(100% - rem(30));
+    text-align: left;
+    flex-grow: 1;
+    padding: rem(15);
+    background: $GR-1;
+    border-radius: rem(10);
+    @include boxShadow;
+
+    .mission-container-title {
+        height: rem(25);
+        font-weight: 600;
+        font-size: rem(15);
+        margin-bottom: rem(10);
+        color: $GR-6;
+    }
+
+    .mission-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: rem(10);
+        max-height: calc(100% - rem(25));
+        overflow: scroll;
+
+        .mission-elem {
+            display: flex;
+            align-items: center;
+            font-size: 30%;
+            gap: rem(5);
+            background: rgba(255, 255, 255, 0.817);
+            padding: rem(10);
+            border-radius: rem(10);
+            color: $BK;
+            transition: 0.2s;
+
+            &#completed {
+                background: $GR-2;
+
+                .mission-name {
+                    text-decoration: line-through 1px solid $RE;
+                }
+            }
+
+            .check-box {
+                position: relative;
+                font-size: 1rem;
+
+                svg { color: $RE; }
+
+                #check {
+                    position: absolute;
+                    left: rem(-2); bottom: rem(2.5);
+                    font-size: rem(15);
+                    color: $RE;
+                }
+            }
+        }
+    }
+}

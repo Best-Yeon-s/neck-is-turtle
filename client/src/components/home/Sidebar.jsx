@@ -10,7 +10,7 @@ function Sidebar() {
             <img className="user-profile" src={defaultProfile}/>
             <div className="user-name-wrapper">
                 <div className="user-name">방울토망토</div>
-                <div className="user-title">바른 자세 전문가</div>
+                {/* <div className="user-title">바른 자세 전문가</div> */}
             </div>
         </div>
     )

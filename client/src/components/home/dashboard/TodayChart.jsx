@@ -1,27 +1,11 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
+import Mission from '../mission';
 import MyResponsivePie from './TodayPieChart';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
-
-export const data = {
-  labels: ['바른 자세 시간', '거북목 시간'],
-  datasets: [
-    {
-      label: '자세 측정',
-      data: [10, 1],
-      backgroundColor: [
-        '#5C913B',
-        '#BBBBBB',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+const missionList = [
+  { complete: false, name: '바른자세 연속 15분 달성하기' },
+  { complete: false, name: '바른 자세 시간 30분 이상 채우기' },
+  { complete: true, name: '스트레칭 하기' },
+]
 
 export function TodayChart() {
   return (
@@ -29,16 +13,15 @@ export function TodayChart() {
         <div className="chart-title">Today</div>
         <div className="today-status-wrapper">
             <div className="today-status-chart">
-                {/* <Doughnut className="chart" data={data} /> */}
                 <MyResponsivePie/>
             </div>
-            {/* <div className="today-status">
-                <div>바른 자세 비율</div>
-                <div className="straight-percent">
-                    80<span>%</span>
-                </div>
-                <div>5h 30min</div>
-            </div> */}
+            <div className="today-time-mission-wrapper">
+              <div className="today-straight-time">
+                <div className="straight-title">바른 자세 시간</div>
+                <div className="straight-time">5h 30min</div>
+              </div>
+              <Mission missionList={missionList}/>
+            </div>
         </div>
 
     </div>

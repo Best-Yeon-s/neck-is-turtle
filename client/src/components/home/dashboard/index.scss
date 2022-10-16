@@ -13,34 +13,46 @@
     gap: rem(20);
 
     .today-chart {
-        width: rem(400);
-        height: rem(300);
+        width: calc(50% - rem(10));
+        min-width: rem(500);
+        height: 100%;
 
         .today-status-wrapper {
+            width: 100%;
+            height: calc(100% - rem(46));
             display: flex;
             align-items: center;
 
             .today-status-chart {
-                width: 100%;
-                height: rem(280);
+                width: 60%;
+                height: 100%;
             }
 
-            .today-status {
-                width: rem(100);
+            .today-time-mission-wrapper {
+                width: 40%;
+                height: 100%;
                 font-size: rem(16);
                 display: flex;
                 flex-direction: column;
-                align-items: center;
                 gap: rem(10);
 
-                .straight-percent {
-                    font-size: rem(50);
-                    font-weight: 700;
-                    color: $GN-4;
+                .today-straight-time {
+                    width: calc(100% - rem(20));
+                    height: rem(43);
+                    padding: rem(10);
+                    text-align: left;
+                    background: $GN-4;
+                    border-radius: rem(10);
+                    color: $IV;
+                    @include boxShadow;
 
-                    span {
-                        font-size: rem(14);
-                        // font-weight: 500;
+                    .straight-title {
+                        font-size: rem(12);
+                    }
+
+                    .straight-time {
+                        font-size: rem(18);
+                        font-weight: 600;
                     }
                 }
             }
@@ -71,11 +83,13 @@
             font-weight: 600;
             font-size: rem(18);
             padding: 10px;
+            color: $GR-6;
         }
     }
 
     .today-webcam-wrapper {
-        height: rem(300);
+        min-height: rem(300);
+        height: calc(50% - rem(10));
         display: flex;
         gap: rem(20);
     }
@@ -84,7 +98,8 @@
         display: flex;
         gap: rem(20);
         width: 100%;
-        height: calc(100% - rem(300) - rem(30));
+        // height: calc(100% - rem(300) - rem(30));
+        height: calc(50% - rem(20));
 
 
         .posture-calendar {

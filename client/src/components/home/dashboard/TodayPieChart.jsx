@@ -10,14 +10,12 @@ let data = [
     {
         "id": "바른 자세",
         "label": "바른 자세",
-        "value": 449,
-        "color": "hsl(56, 70%, 50%)"
+        "value": 84,
     },
     {
         "id": "turtle",
         "label": "거북목 자세",
-        "value": 382,
-        "color": "hsl(209, 70%, 50%)"
+        "value": 16,
     },
   ]
 
@@ -30,7 +28,7 @@ const MyResponsivePie = ({  /* see data tab */ }) => (
         padAngle={0.7}
         cornerRadius={3}
         activeOuterRadiusOffset={8}
-        colors={['#5C913B', '#F47560']}
+        colors={['#89c264', '#F47560']}
         borderWidth={1}
         borderColor={{
             from: 'color',
@@ -84,29 +82,29 @@ const MyResponsivePie = ({  /* see data tab */ }) => (
             },
         ]}
         legends={[
-            // {
-            //     anchor: 'bottom',
-            //     direction: 'row',
-            //     justify: false,
-            //     translateX: 0,
-            //     translateY: 56,
-            //     itemsSpacing: 0,
-            //     itemWidth: 100,
-            //     itemHeight: 18,
-            //     itemTextColor: '#999',
-            //     itemDirection: 'left-to-right',
-            //     itemOpacity: 1,
-            //     symbolSize: 18,
-            //     symbolShape: 'circle',
-            //     effects: [
-            //         {
-            //             on: 'hover',
-            //             style: {
-            //                 itemTextColor: '#000'
-            //             }
-            //         }
-            //     ]
-            // }
+            {
+                anchor: 'bottom',
+                direction: 'row',
+                justify: false,
+                translateX: 0,
+                translateY: 56,
+                itemsSpacing: 0,
+                itemWidth: 100,
+                itemHeight: 18,
+                itemTextColor: '#999',
+                itemDirection: 'left-to-right',
+                itemOpacity: 1,
+                symbolSize: 18,
+                symbolShape: 'circle',
+                effects: [
+                    {
+                        on: 'hover',
+                        style: {
+                            itemTextColor: '#000'
+                        }
+                    }
+                ]
+            }
         ]}
     />
 )
