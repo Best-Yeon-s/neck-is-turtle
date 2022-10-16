@@ -5,6 +5,7 @@ import { Camera } from '@mediapipe/camera_utils';
 import { BsFillCheckCircleFill, BsFillExclamationTriangleFill } from 'react-icons/bs';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import './MeasurePose.scss';
+import PoseStatusHandler from "./PoseStatusHandler";
 
 let camera;
 
@@ -15,7 +16,9 @@ function MeasuerPose({  }) {
     const [shoulderW, setShoulderW] = useState(0);
     const [neckDegree, setNeckDegree] = useState(0);
     const [status, setStatus] = useState('NOT_DETECTED'); // NOT_DETECTED, TURTLE, STRAIGHT
-
+    const [straightRatio, setStraightRatio] = useState(0.42);
+    const [maxStraightRange, setMaxStraightRange] = useState(0.05);
+    
     const getDistance = (p1, p2) => {
         return Math.sqrt((p1.x - p2.x)**2 + (p1.y - p2.y)**2 + (p1.z - p2.z)**2);
     }
@@ -28,15 +31,9 @@ function MeasuerPose({  }) {
       return { x: p1.x - p2.x, y: p1.y - p2.y, z: p1.z - p2.z };
     }
 
-    useEffect(()=>{
-      if (neckDegree > 28) setStatus('TURTLE')
-      else setStatus('STRAIGHT');
-    }, [neckDegree])
-
     const onResults = (results) => {
       if (results.poseLandmarks?.length || !results.poseLandmarks[7]) {
         setFaceDetected(true);
-        setStatus('NOT_DETECTED');
         const faceWidth = getDistance(results.poseLandmarks[7], results.poseLandmarks[8]);
         const shoulderWidth = getDistance(results.poseLandmarks[11], results.poseLandmarks[12]);
         setFaceW(Math.round(faceWidth * 100));
@@ -49,11 +46,11 @@ function MeasuerPose({  }) {
         const faceMidPoint = getMidPoint(results.poseLandmarks[7], results.poseLandmarks[8]);
         const shoulderMidPoint = getMidPoint(results.poseLandmarks[11], results.poseLandmarks[12]);
         const neckDirectionVector = getDirectionVector(faceMidPoint, shoulderMidPoint);
-        console.log(Math.asin(Math.abs(neckDirectionVector.z) / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
-        setNeckDegree(Math.asin(Math.abs(neckDirectionVector.z) / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
+        // console.log(Math.asin(Math.abs(neckDirectionVector.z) / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
+        // setNeckDegree(Math.asin(Math.abs(neckDirectionVector.z) / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
       } else {
         setFaceDetected(false);
-        setStatus('NOT_DETECTED');
+        status !== 'NOT_DETECTED' && setStatus('NOT_DETECTED');
         console.log('얼굴 감지되지 않음');
       }
     }
@@ -92,13 +89,19 @@ function MeasuerPose({  }) {
     }, [webcamRef, webcamRef.current]);
 
     useEffect(()=>{
-      if (neckDegree > 28) setStatus('TURTLE');
-      else setStatus('STRAIGHT');
-    }, [neckDegree])
+      if (!!((faceW / shoulderW) - straightRatio > maxStraightRange)) { status !== 'TURTLE' && setStatus('TURTLE'); }
+      else  { status !== 'STRAIGHT' && setStatus('STRAIGHT'); }
+    }, [faceW, shoulderW])
+
+    // useEffect(()=>{
+    //   if (neckDegree > 28) { status !== 'TURTLE' && setStatus('TURTLE'); }
+    //   else  { status !== 'STRAIGHT' && setStatus('STRAIGHT'); }
+    // }, [neckDegree])
 
     return (
       <div className="webcam-container"
       >
+        <PoseStatusHandler status={status}/>
         <div className="webcam-status-wrapper"
           id={status}
         >
@@ -108,7 +111,6 @@ function MeasuerPose({  }) {
           />
           <button className="set-straight-standard">
             <AiTwotoneSetting />
-
             <div className="set-straight-standard-description">
               자세가 제대로 측정되지 않는다면<br/>
               버튼을 눌러 바른 자세 기준을 재설정해주세요!
@@ -118,13 +120,8 @@ function MeasuerPose({  }) {
             faceDetected
             ? <>
 
-          {/* {
-            !!((faceW / shoulderW) - straightRatio > maxStraightRange)
-            ? "바르지 않은 자세입니다"
-            : "바른 자세입니다"
-          } */}
           {
-            !!(neckDegree > 28)
+            !!((faceW / shoulderW) - straightRatio > maxStraightRange)
             ? <div className="pose-status" id="turtle">
               <BsFillExclamationTriangleFill />
               <span>바르지 않은 자세입니다</span>
@@ -134,6 +131,17 @@ function MeasuerPose({  }) {
               <span>올바른 자세입니다</span>
             </div>
           }
+          {/* {
+            !!(neckDegree > 28)
+            ? <div className="pose-status" id="turtle">
+              <BsFillExclamationTriangleFill />
+              <span>바르지 않은 자세입니다</span>
+            </div>
+            : <div className="pose-status" id="straight">
+              <BsFillCheckCircleFill />
+              <span>올바른 자세입니다</span>
+            </div>
+          } */}
             </>
             : <div className="post-not-detected">
               <BsFillExclamationTriangleFill />
