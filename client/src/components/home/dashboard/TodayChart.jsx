@@ -1,5 +1,6 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import MyResponsivePie from './TodayPieChart';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -28,16 +29,16 @@ export function TodayChart() {
         <div className="chart-title">Today</div>
         <div className="today-status-wrapper">
             <div className="today-status-chart">
-                <Doughnut className="chart" data={data} />
+                {/* <Doughnut className="chart" data={data} /> */}
+                <MyResponsivePie/>
             </div>
-            <div className="today-status">
+            {/* <div className="today-status">
                 <div>바른 자세 비율</div>
                 <div className="straight-percent">
                     80<span>%</span>
-                    {/* 5<span>h</span> 30<span>min</span> */}
                 </div>
                 <div>5h 30min</div>
-            </div>
+            </div> */}
         </div>
 
     </div>

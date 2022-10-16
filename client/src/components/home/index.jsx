@@ -4,7 +4,7 @@ import MeasuerPose from '../MeasurePose';
 import './index.scss';
 
 function Home() {
-
+  
     return (
         <div className="home">
             <Sidebar />

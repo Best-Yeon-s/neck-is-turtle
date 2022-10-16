@@ -9,6 +9,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import MyResponsiveBar from './StackChart';
 
 ChartJS.register(
   CategoryScale,
@@ -57,7 +58,8 @@ function PoseGraph() {
         <div className="pose-graph chart-wrapper">
             <div className="chart-title">변화 추이</div>
             <div className="pose-graph-chart">
-                <Line options={options} data={data} />
+              <MyResponsiveBar />
+                {/* <Line options={options} data={data} /> */}
             </div>
         </div>
     )

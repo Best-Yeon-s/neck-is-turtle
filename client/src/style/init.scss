@@ -21,18 +21,22 @@ code {
         monospace;
 }
 
+div {
+    cursor: default;
+}
+
 a {
     text-decoration: none;
     color: black;
 }
   
-// button {
-//     border: 0;
-//     font-family: NotoSansKR;
-//     cursor: pointer;
-//     background: transparent;
-// }
-// button:focus-visible { outline: none; }
+button {
+    border: 0;
+    font-family: NotoSansKR;
+    cursor: pointer;
+    background: transparent;
+}
+button:focus-visible { outline: none; }
 
 ::selection {
     background-color: #6ea55a30;
