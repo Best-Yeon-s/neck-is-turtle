@@ -110,7 +110,7 @@ function MeasuerPose({  }) {
             ref={webcamRef}
           />
           <button className="set-straight-standard">
-            <AiTwotoneSetting />
+            <AiTwotoneSetting onClick={()=>{setStraightRatio(faceW/shoulderW)}}/>
             <div className="set-straight-standard-description">
               자세가 제대로 측정되지 않는다면<br/>
               버튼을 눌러 바른 자세 기준을 재설정해주세요!

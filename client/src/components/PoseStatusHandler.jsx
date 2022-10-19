@@ -20,14 +20,14 @@ function PoseStatusHandler({ status }) {
                     setTurtleSec(time.current);
 
                     if (time.current == 10) {
-                        fireNotification('자세를 고쳐 앉으세요');
+                        fireNotification('자세를 고쳐 앉으세요', 'WARNING');
                     }
                     break;
                 case 'STRAIGHT':
                     setStraightSec(time.current);
 
                     if (time.current == 100) {
-                        fireNotification('바른 자세를 잘 유지하고 있네요!');
+                        fireNotification('바른 자세를 잘 유지하고 있네요!', 'CORRECT');
                     }
                     break;
                 default:

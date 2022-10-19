@@ -1,8 +1,18 @@
 import { useRef } from 'react';
+import warningImage from '../assets/images/warning.png';
+import correctImage from '../assets/images/correct.png';
+import stretchingImage from '../assets/images/stretching.png';
 
 const usePushNotification = () => {
   const notificationRef = useRef(null);
-  const warningSound = new Audio(`${process.env.PUBLIC_URL}/audio/turtle_warning.m4a`);
+  const turtleSound = new Audio(`${process.env.PUBLIC_URL}/audio/turtle_warning.m4a`);
+
+  const alertTypeList = [
+    { typeId: 'DEFAULT', image: turtleSound, sound: turtleSound },
+    { typeId: 'WARNING', image: warningImage, sound: turtleSound },
+    { typeId: 'CORRECT', image: correctImage, sound: turtleSound },
+    { typeId: 'MISSION', image: stretchingImage, sound: turtleSound },
+  ]
 
   // Notification이 지원되지 않는 브라우저가 있을 수 있기 때문에, 이를 대비해 Early return 문을 걸어줌
   if (!Notification) {
@@ -37,14 +47,15 @@ const usePushNotification = () => {
     };
   };
   
-  const fireNotification = (title, options = {}) => {
+  const fireNotification = (title, alertTypeId = 'DEFAULT', options = {}) => {
+    let alertType = alertTypeList.find(el=>el.typeId===alertTypeId);
+
     const newOption = {
       badge: '',
-      icon: '',
+      icon: alertType.image,
       ...options
     }
-
-    warningSound.play();
+    alertType.sound.play();
     // notificationRef에 Notification을 넣어줌
     notificationRef.current = new Notification(title, newOption)
 
