@@ -1,0 +1,86 @@
+/* init */
+.App { text-align: center; }
+
+body {
+    // font-size: 100%;
+    margin: 0;
+    font-family: NotoSansKR, KoreanDKB;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    -webkit-touch-callout:none;
+    // -webkit-user-select:none;
+    -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+
+html {
+    font-size: 50%;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+div {
+    cursor: default;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+  
+button {
+    border: 0;
+    font-family: NotoSansKR;
+    cursor: pointer;
+    background: transparent;
+}
+button:focus-visible { outline: none; }
+
+::selection {
+    background-color: #6ea55a30;
+}
+
+ul {
+    list-style:none;
+    padding-left: 0px;
+    margin: 0;
+}
+
+pre { 
+    font-family: 'NotoSansKR'; 
+    margin: 0;
+}
+
+textarea {
+    resize: none;
+    border: 0;
+    font-family: 'NotoSansKR';
+
+    &:focus-visible { outline: none; }
+}
+
+// input {
+//     appearance: none;
+//     -webkit-appearance: none;
+//     border: 0;
+//     font-family: 'NotoSansKR';
+// }
+// input:focus-visible {outline: none;}
+// input[type=file] {display: none;}
+
+// 자주 쓰는 css
+.row { display: flex; flex-direction: row; }
+.column { display: flex; flex-direction: column; }
+.right { float: right; justify-content: flex-end; }
+.left { float: left; }
+#top {
+    position: absolute;
+    top: 0;
+}
+
+#disabled {
+    pointer-events: none;
+}

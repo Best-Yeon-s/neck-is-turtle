@@ -1,0 +1,25 @@
+$BK : #292F33;
+$IV : #FFFAF0;
+$GN-1 : #D5E7B8;
+$GN-2 : #C4DEA4;
+$GN-3 : #A7D489;
+$GN-4 : #89c264;
+$GN-5 : #678e4e;
+$GN-6 : #1F390F;
+$GR-1 : #EEEEEE;
+$GR-2 : #D1D1D1;
+$GR-3 : #BBBBBB;
+$GR-4 : #A6A6A6;
+$GR-5 : #868686;
+$GR-6 : #676767;
+$RE : #F47560;
+
+$browser-context : 8;
+
+@mixin boxShadow() {
+    box-shadow: 0 rem(2) rem(4) rem(4) #3a383817;
+}
+
+@function rem($px, $context: $browser-context) {
+    @return #{$px/$context}rem;
+}

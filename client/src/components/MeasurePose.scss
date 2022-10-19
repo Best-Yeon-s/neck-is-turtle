@@ -1,0 +1,93 @@
+@import '../style/var.scss';
+
+.webcam-container {
+    flex-grow: 1;
+
+    .webcam-status-wrapper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        border-radius: rem(10);
+        overflow: hidden;
+        border: rem(3.5) solid transparent;
+        transition: 0.2s;
+
+        &#TURTLE { border-color: $RE; }
+        &#STRAIGHT { border-color: $GN-4; }
+    }
+
+    video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .set-straight-standard {
+        position: absolute;
+        right: rem(10);
+        top: rem(10);
+        background: $IV;
+        width: rem(30); height: rem(30);
+        color: $BK;
+        border-radius: 50%;
+        font-size: rem(13);
+
+        .set-straight-standard-description {
+            position: absolute;
+            width: max-content;
+            right: 0; top: calc(100% + rem(5));
+            font-size: rem(10);
+            background: $IV;
+            font-weight: 500;
+            border-radius: rem(10);
+            padding: rem(10) rem(15);
+            display: none;
+        }
+
+        &:hover {
+            .set-straight-standard-description {
+                display: block;
+                animation: showDown 0.3s;
+            }
+        }
+    }
+
+    .pose-status {
+        display: flex;
+        align-items: center;
+        gap: rem(5);
+        width: max-content;
+        bottom: rem(10);
+        left: 50%;
+        position: absolute;
+        padding: rem(5) rem(15);
+        transform: translateX(-50%);
+        font-size: rem(12);
+        font-weight: 600;
+        color: white;
+        border-radius: rem(10);
+        
+        &#straight { background: $GN-4; }
+        &#turtle { background: $RE; }
+    }
+
+    .post-not-detected {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: rem(5);
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0; top: 0;
+        background: #0000005e;
+        backdrop-filter: blur(rem(5));
+        font-size: rem(12);
+        color: $IV;
+
+        .warning-title { font-size: rem(20); font-weight: 600; }
+
+        svg { font-size: rem(40); margin-bottom: rem(20); }
+    }
+}

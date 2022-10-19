@@ -1,0 +1,36 @@
+@import '../../style/var.scss';
+
+.sidebar {
+    width: rem(280 - 40);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: rem(30);
+    align-items: center;
+    padding: rem(25) rem(20);
+    flex-shrink: 0;
+
+    .logo {
+        width: auto;
+        height: rem(80);
+    }
+    
+    img.user-profile {
+        width: rem(150); height: rem(150);
+        border-radius: 50%;
+        border: 1px solid $IV;
+    }
+
+    .user-name-wrapper {
+        .user-name {
+            font-size: rem(20);
+            font-weight: 700;
+            color: $IV;
+            margin-bottom: 10px;
+        }
+
+        .user-title {
+            
+        }
+    }
+}
