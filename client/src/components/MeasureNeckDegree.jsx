@@ -35,7 +35,7 @@ function MeasureNeckDegree({  }) {
         const faceMidPoint = getMidPoint(results.poseLandmarks[7], results.poseLandmarks[8]);
         const shoulderMidPoint = getMidPoint(results.poseLandmarks[11], results.poseLandmarks[12]);
         const neckDirectionVector = getDirectionVector(faceMidPoint, shoulderMidPoint);
-        console.log(Math.asin(Math.abs(neckDirectionVector.z) / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
+        // console.log(Math.asin(Math.abs(neckDirectionVector.z) / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
         setNeckDegree(Math.asin(Math.abs(neckDirectionVector.z) / getDistance({x:0,y:0,z:0}, neckDirectionVector)) / Math.PI * 180);
       } else {
         setFaceDetected(false);

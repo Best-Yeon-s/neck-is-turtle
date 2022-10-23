@@ -32,7 +32,7 @@ function PoseStatusHandler({ status }) {
                     break;
                 default:
             }
-            console.log(time.current, status);
+            // console.log(time.current, status);
         }, 1000);
 
         return () => clearInterval(timer.current);

@@ -1,0 +1,69 @@
+@import '../../style/var.scss';
+
+.modal .login-modal {
+    width: rem(500);
+    height: rem(350);
+    padding: rem(20);
+    background: $BK;
+    border-radius: rem(20);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $IV;
+    position: relative;
+    overflow: hidden;
+
+    .modal-header {
+        #logo { height: rem(80); }
+
+        .modal-title {
+            font-size: rem(20);
+            font-weight: 600;
+            color: $GN-1;
+            margin: rem(15) 0;
+        }
+
+        .modal-description {
+            font-size: rem(13);
+            font-weight: 500;
+            color: $GR-3;
+        }
+    }
+
+    .hexagon-wrapper {
+        svg {
+            font-size: rem(70);
+            position: absolute;
+
+            &:first-child {
+                left: rem(-35);
+                bottom: rem(50);
+            }
+
+            &:nth-child(2) {
+                left: rem(3);
+                bottom: rem(-20);
+            }
+
+            &:nth-child(3) {
+                left: rem(40);
+                bottom: rem(50);
+            }
+
+            &:nth-child(4) {
+                top: rem(-20);
+                right: rem(-10);
+            }
+
+            &:nth-child(5) {
+                top: rem(47);
+                right: rem(26);
+            }
+
+            &:nth-child(6) {
+                top: rem(-20);
+                right: rem(65);
+            }
+        }
+    }
+}
