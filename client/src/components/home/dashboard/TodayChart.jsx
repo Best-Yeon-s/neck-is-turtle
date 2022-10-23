@@ -1,5 +1,5 @@
 import Mission from '../mission';
-import MyResponsivePie from './TodayPieChart';
+import TodayPostureChart from './TodayPostureChart';
 
 const missionList = [
   { complete: false, name: '바른자세 연속 15분 달성하기' },
@@ -13,7 +13,7 @@ export function TodayChart() {
         <div className="chart-title">Today</div>
         <div className="today-status-wrapper">
             <div className="today-status-chart">
-                <MyResponsivePie/>
+                <TodayPostureChart/>
             </div>
             <div className="today-time-mission-wrapper">
               <div className="today-straight-time">

@@ -1,4 +1,4 @@
-import MyResponsiveTimeRange from "./CalendarChart";
+import MyResponsiveTimeRange from "./MissionChart";
 
 function PostureCalendar() {
 

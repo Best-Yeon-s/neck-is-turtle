@@ -461,12 +461,7 @@ let data = [
     }
   ]
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-const MyResponsiveTimeRange = ({ /* see data tab */ }) => (
+const MissionChart = ({ /* see data tab */ }) => (
     <ResponsiveTimeRange
         data={data}
         from="2022-06-01"
@@ -493,4 +488,4 @@ const MyResponsiveTimeRange = ({ /* see data tab */ }) => (
         ]}
     />
 )
-export default MyResponsiveTimeRange;
+export default MissionChart;

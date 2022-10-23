@@ -38,14 +38,9 @@ let data = [
       "바른 자세": 81,
       "거북목": 19,
     }
-  ]
+]
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-const MyResponsiveBar = ({ /* see data tab */ }) => (
+const PoseTimeStackChart = ({ /* see data tab */ }) => (
     <ResponsiveBar
         data={data}
         keys={[
@@ -162,4 +157,4 @@ const MyResponsiveBar = ({ /* see data tab */ }) => (
         barAriaLabel={function(e){return e.id+": "+e.formattedValue+" in date: "+e.indexValue}}
     />
 )
-export default MyResponsiveBar;
+export default PoseTimeStackChart;
