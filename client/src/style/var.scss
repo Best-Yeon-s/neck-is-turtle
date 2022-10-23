@@ -16,6 +16,11 @@ $RE : #F47560;
 
 $browser-context : 8;
 
+@mixin hoverDown($distance: rem(10), $time: 0.2s) {
+    transition: $time;
+    &:hover { transform: translateY($distance); }
+}
+
 @mixin boxShadow() {
     box-shadow: 0 rem(2) rem(4) rem(4) #3a383817;
 }

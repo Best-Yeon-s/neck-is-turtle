@@ -16,7 +16,7 @@ function LoginModal() {
             <div className="login-modal modal-wrapper">
                 <div className="modal-header">
                     <Logo id="logo"/>
-                    <div className="modal-title">LOGIN</div>
+                    <div className="modal-title">시작하기</div>
                     <div className="modal-description">
                         목이 거북해와 함께 바른 자세 습관을 길러보세요
                     </div>
@@ -24,15 +24,8 @@ function LoginModal() {
                 <div className="modal-content">
                     {/* <button onClick={()=>{login()}}>구글 로그인</button> */}
                 <GoogleLogin
-                    // render={renderProps => (
-                    //     <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                    //         구글로 시작하기
-                    //     </button>
-                    // )}
                     onSuccess={findUser}
                     onFailure={(res)=>console.log("login fail", res)}
-                    cookiePolicy={'single_host_origin'}
-                    // ux_mode={"popup"}
                 />
                 </div>
                 <div className="hexagon-wrapper">
