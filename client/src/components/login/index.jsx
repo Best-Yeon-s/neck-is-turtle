@@ -1,14 +1,18 @@
-import Modal from '../modal/Modal';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
+import UserApi from '../../apis/UserApi';
+import Modal from '../modal/Modal';
 import { ReactComponent as Logo } from '../../assets/svg/logo.svg';
 import { BsFillHexagonFill } from 'react-icons/bs';
 import './index.scss';
 
 function LoginModal() {
-    const findUser = (res) => {
-        let userInfo = jwt_decode(res.credential);
-        console.log(userInfo);
+    const userApi = new UserApi();
+
+    const loginSuccess = (res) => {
+        const userInfo = jwt_decode(res.credential);
+        const { email, name, picture } = userInfo;
+        userApi.loginHandler(email, name, picture);
     }
 
     return (
@@ -24,7 +28,7 @@ function LoginModal() {
                 <div className="modal-content">
                     {/* <button onClick={()=>{login()}}>구글 로그인</button> */}
                 <GoogleLogin
-                    onSuccess={findUser}
+                    onSuccess={loginSuccess}
                     onFailure={(res)=>console.log("login fail", res)}
                 />
                 </div>
