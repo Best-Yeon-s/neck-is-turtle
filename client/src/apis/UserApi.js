@@ -1,6 +1,7 @@
 import { get, post, put, destroy } from './AxiosCreate';
 import store from '../redux/store';
 import { setAuth, setEmail, setName, setPicture } from '../redux/userData/userDataAction';
+import { setShowLoginModal } from '../redux/modal/modalAction';
 
 class UserApi {
     /**
@@ -36,7 +37,7 @@ class UserApi {
         store.dispatch(setEmail(email));
         store.dispatch(setPicture(picture));
         store.dispatch(setAuth(true));
-
+        store.dispatch(setShowLoginModal(false));
         return true;
     }
 
