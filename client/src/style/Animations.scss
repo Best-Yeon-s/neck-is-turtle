@@ -2,6 +2,11 @@
     0% { opacity: 0; transform: translateY(-5px); }
 }
 
+@keyframes showOpacity {
+    0% { opacity: 0; }
+    100% { opacity: 100%; }
+}
+
 @keyframes fadeInOut {
     50% { opacity: 50%; }
     100% { opacity: 0%; }

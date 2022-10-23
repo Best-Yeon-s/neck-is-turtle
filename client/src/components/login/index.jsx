@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+import { setShowLoginModal } from '../../redux/modal/modalAction';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import UserApi from '../../apis/UserApi';
@@ -7,6 +9,7 @@ import { BsFillHexagonFill } from 'react-icons/bs';
 import './index.scss';
 
 function LoginModal() {
+    const dispatch = useDispatch();
     const userApi = new UserApi();
 
     const loginSuccess = (res) => {
@@ -16,7 +19,7 @@ function LoginModal() {
     }
 
     return (
-        <Modal displayType={"center"} closeModal={console.log("hi")}>
+        <Modal displayType={"center"} closeModal={()=>{dispatch(setShowLoginModal(false))}}>
             <div className="login-modal modal-wrapper">
                 <div className="modal-header">
                     <Logo id="logo"/>

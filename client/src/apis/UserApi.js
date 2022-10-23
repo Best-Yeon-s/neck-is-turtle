@@ -4,6 +4,19 @@ import { setAuth, setEmail, setName, setPicture } from '../redux/userData/userDa
 
 class UserApi {
     /**
+    * 현재 저장된 토큰으로 유저 정보를 받아옴
+    */
+    getUserInfo = async () => {
+        store.dispatch(setAuth(false));
+
+        try {
+
+        } catch(err) {
+            store.dispatch(setAuth(false));
+        }
+    }
+
+    /**
     * user info를 통해 로그인 또는 회원가입 진행
     * 
     * @ param 유저의 이메일, 이름, 프로필 사진

@@ -6,6 +6,7 @@
     background-color: #00000090;
     z-index: 3;
     display: flex;
+    animation: showOpacity 0.5s;
 
     &#center {
         justify-content: center;

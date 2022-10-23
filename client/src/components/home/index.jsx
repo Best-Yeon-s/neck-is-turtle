@@ -8,7 +8,6 @@ function Home() {
   
     return (
         <div className="home">
-            <LoginModal />
             <Sidebar />
             <Dashboard />
             {/* <MeasuerPose /> */}
