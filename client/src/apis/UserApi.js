@@ -1,4 +1,6 @@
 import { get, post, put, destroy } from './AxiosCreate';
+import store from '../redux/store';
+import { setAuth, setEmail, setName, setPicture } from '../redux/userData/userDataAction';
 
 class UserApi {
     /**
@@ -17,6 +19,10 @@ class UserApi {
         }
 
         // localStorage.setItem('token', token);
+        store.dispatch(setName(name));
+        store.dispatch(setEmail(email));
+        store.dispatch(setPicture(picture));
+        store.dispatch(setAuth(true));
 
         return true;
     }
