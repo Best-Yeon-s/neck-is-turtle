@@ -1,11 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import MeasuerPose from './MeasurePoseTest';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import MeasuerPose from './MeasurePoseTest';
 import Home from './components/home';
 import UserApi from './apis/UserApi';
 import LoginModal from './components/login';
+import './App.css';
+import Stretching from './components/stretching';
 
 function App() {
   const userApi = new UserApi();
@@ -26,9 +27,14 @@ function App() {
 
   return (
     <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/stretching" element={<Stretching />}/>
+          <Route path="/" element={<Home />}/>
+        </Routes>
+      </BrowserRouter>
       { showLogin && <LoginModal /> }
       {/* <MeasuerPose /> */}
-      <Home />
     </div>
   );
 }

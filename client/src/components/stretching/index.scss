@@ -1,0 +1,15 @@
+@import '../../style/var.scss';
+
+.stretching {
+    display: flex;
+
+    .stretching-steps-wrapper {
+        width: 10vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .webcam-container {
+        width: calc(100% - 10vw);
+    }
+}

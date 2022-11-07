@@ -1,6 +1,6 @@
 import { TodayChart } from './TodayChart';
 import MeasurePose from '../../MeasurePose';
-import MeasureNeckDegree from '../../MeasureNeckDegree';
+// import MeasureNeckDegree from '../../MeasureNeckDegree';
 import PoseGraph from './PoseGraph';
 import PostureCalendar from './PostureCalendar';
 import './index.scss';
@@ -12,8 +12,8 @@ function Dashboard() {
             <div className="today-webcam-wrapper">
                 <TodayChart />
 
-                {/* <MeasuerPose /> */}
-                <MeasureNeckDegree />
+                <MeasurePose />
+                {/* <MeasureNeckDegree /> */}
             </div>
             <div className="posture-transition-wrapper">
                 <PostureCalendar />
