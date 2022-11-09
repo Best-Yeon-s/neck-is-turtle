@@ -1,13 +1,13 @@
-package com.example.neckisturtleback;
+package com.example.neckisturtle;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NeckIsTurtleBackApplication {
+public class NeckIsTurtleApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NeckIsTurtleBackApplication.class, args);
+		SpringApplication.run(NeckIsTurtleApplication.class, args);
 	}
 
 }

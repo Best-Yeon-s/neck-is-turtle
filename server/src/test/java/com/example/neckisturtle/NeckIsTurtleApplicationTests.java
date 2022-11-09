@@ -1,10 +1,10 @@
-package com.example.neckisturtleback;
+package com.example.neckisturtle;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NeckIsTurtleBackApplicationTests {
+class NeckIsTurtleApplicationTests {
 
 	@Test
 	void contextLoads() {
