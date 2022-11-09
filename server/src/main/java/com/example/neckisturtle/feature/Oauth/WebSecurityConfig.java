@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomOAuth2UserService oAuth2UserService;
+    private final CustomUserDetailService customUserDetailService;
     private final OAuth2SuccessHandler successHandler;
     private final TokenService tokenService;
 
@@ -21,13 +22,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
                 .authorizeRequests()
+                .mvcMatchers( "/api/v1/user/signin").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
-                .successHandler(successHandler)
-                .userInfoEndpoint().userService(oAuth2UserService);
+                .userInfoEndpoint().userService(customUserDetailService)
+                .and()
+                .defaultSuccessUrl("/api/v1/user/signin")
+                .failureUrl("/fail");
+
     }
 }

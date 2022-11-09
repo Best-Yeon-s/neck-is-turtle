@@ -1,13 +1,19 @@
 package com.example.neckisturtle.feature.controller;
 
+import com.example.neckisturtle.feature.service.UserService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
 public class user {
+
+    private UserService userService;
+
     @PostMapping("/signin")
-    public String signIn(){
-        return "signIn";
+    public Object signIn(OAuth2User oAuth2User){
+        return ResponseEntity.ok(userService.signin(oAuth2User));
     }
 
     @PostMapping("/signup")

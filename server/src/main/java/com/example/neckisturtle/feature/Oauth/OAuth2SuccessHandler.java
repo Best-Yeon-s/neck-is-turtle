@@ -33,7 +33,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String targetUrl;
         log.info("토큰 발행 시작");
 
-        Token token = tokenService.generateToken(userDto.getEmail(), "USER");
+        Token token = tokenService.generateToken(oAuth2User);
         log.info("{}", token);
 //        targetUrl = UriComponentsBuilder.fromUriString("/home")
 //                .queryParam("token", "token")
