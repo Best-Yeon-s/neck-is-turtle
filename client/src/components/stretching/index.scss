@@ -2,14 +2,124 @@
 
 .stretching {
     display: flex;
+    gap: 0.5vw;
 
     .stretching-steps-wrapper {
-        width: 10vw;
+        width: 15vw - 2vw;
+        padding: 1vw;
         display: flex;
         flex-direction: column;
+        gap: 1vw;
+
+        .stretching-step {
+            width: 100%;
+            height: 10vw;
+            border-radius: 0.5vw;
+            overflow: hidden;
+            background-size: cover;
+            position: relative;
+            cursor: pointer;
+            border: 0.2vw solid;
+            transition: 0.2s;
+
+            .stretching-step-num {
+                width: 1.5vw;
+                height: 1.5vw;
+                line-height: 1.5vw;
+                font-size: 0.9vw;
+                border-radius: 50%;
+                position: absolute;
+                left: 0.5vw; top: 0.5vw;
+                background-color: $GR-6;
+                color: $IV;
+                font-weight: 600;
+            }
+            
+            .stretching-step-complete { 
+                width: 100%; 
+                height: 100%; 
+                position: absolute;
+                background-color: #00000050;
+            }
+
+            &#current-stretching {
+                border-color: $RE;
+            }
+        }
     }
 
-    .webcam-container {
-        width: calc(100% - 10vw);
+    .stretching-webcam-container {
+        $webcam-padding-top: 2vh;
+        $webcam-padding-left: 2vh;
+        $webcam-gap: 2vh;
+        $webcam-height: 90vh;
+
+        width: calc(100% - 15vw - $webcam-padding-top - $webcam-padding-left);
+        height: 100vh - $webcam-padding-top * 2;
+        display: flex;
+        flex-direction: column;
+        gap: $webcam-gap;
+        padding: $webcam-padding-top $webcam-padding-left;
+        position: relative;
+
+        .stretching-webcam-wrapper {
+            width: 100%;
+            height: $webcam-height;
+            border-radius: 1vw;
+            overflow: hidden;
+
+            video {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .curr-stretching-info-wrapper {
+            flex-grow: 1;
+
+            .second {
+                position: absolute;
+                bottom: 30vh;
+                right: 4vw;
+                font-weight: 600;
+                font-size: 2vw;
+            }
+
+            .stretching-alert-text {
+                position: absolute;
+                top: 2vw;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 1vw;
+                padding: 1vw 1.2vw;
+                border-radius: 3vw;
+                font-weight: 600;
+                color: $IV;
+
+                &#incorrect { background-color: $RE; }
+                &#correct { background-color: $GN-2; }
+            }
+
+            img {
+                width: 8vw;
+                height: 6vw;
+                object-fit: cover;
+                border-radius: 1vw;
+            }
+
+            .curr-stretching-description {
+                font-size: 1.5vw;
+                font-weight: 600;
+            }
+
+            .curr-stretching-info {
+                border-radius: 1vw;
+                display: flex;
+                gap: 2vw;
+                align-items: center;
+                padding: 2vw;
+                background: $IV;
+            }
+        }
     }
 }

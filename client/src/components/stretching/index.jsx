@@ -10,6 +10,7 @@ function Stretching() {
     const timer = useRef();
     const time = useRef(0);
     const [sec, setSec] = useState(0);
+    const [alertText, setAlertText] = useState('');
 
     const stretchingSteps = [
         {
@@ -22,7 +23,13 @@ function Stretching() {
                     const neckRotateDegree = getDegree(neckDirectionVector, { x: 0, y: 1, z: 0 });
 
                     // 목이 25도 이상 오른쪽으로 기울어져 있다면
-                    setCorrectPose(neckRotateDegree > 25 && neckDirectionVector.x > 0);
+                    if (neckRotateDegree > 25 && neckDirectionVector.x > 0) {
+                        setCorrectPose(true);
+                        setAlertText(`잘하고 있어요! 그대로 ${this.duration}초간 유지해볼게요`);
+                    } else {
+                        if (neckDirectionVector.x <= 0) { setAlertText('머리를 오른쪽으로 기울여주세요'); }
+                        else if (neckRotateDegree <= 15) { setAlertText('머리를 좀 더 당겨주세요'); }
+                    }
                 }
             }, 
             text: '머리에 손을 얹은 후 오른쪽으로 천천히 당겨주세요',
@@ -38,7 +45,7 @@ function Stretching() {
                     const neckRotateDegree = getDegree(neckDirectionVector, { x: 0, y: 1, z: 0 });
 
                     // 목이 25도 이상 오른쪽으로 기울어져 있다면
-                    setCorrectPose(neckRotateDegree > 25 && neckDirectionVector.x < 0);
+                    setCorrectPose(neckRotateDegree > 15 && neckDirectionVector.x < 0);
                 }
             }, 
             text: '머리에 손을 얹은 후 왼쪽으로 천천히 당겨주세요', 
@@ -46,7 +53,18 @@ function Stretching() {
         },
     ]
 
-    const [completeList, setCompleteList] = useState(new Array(stretchingSteps.length, false));
+    const [completeList, setCompleteList] = useState(new Array(stretchingSteps.length));
+
+    const completeStretching = (_step) => {
+        let tempCompleteList = [...completeList];
+        tempCompleteList[_step] = true;
+        setCompleteList(tempCompleteList);
+        setAlertText(null);
+
+        if (_step < stretchingSteps.length - 1) {
+            setStep(_step + 1);
+        }
+    }
 
     const currAction = useMemo(()=>{
         return stretchingSteps[step].action;
@@ -69,7 +87,7 @@ function Stretching() {
                     time.current += 1;
                     setSec(parseInt(time.current));
                 } else {
-                    setStep(step + 1);
+                    completeStretching(step);
                     time.current = 0;
                     setSec(0);
                 }
@@ -92,17 +110,36 @@ function Stretching() {
                     <div 
                         className="stretching-step"
                         onClick={()=>{setStep(idx)}}
+                        style={{backgroundImage: `url(${stretching.img})`}}
+                        id={step===idx ? 'current-stretching' : null}
                     >
-                        <img src={stretching.img}/>
+                        <div className="stretching-step-num">{ idx + 1 }</div>
+                        {
+                            !!(completeList[idx]) &&
+                            <div className="stretching-step-complete"/>
+                        }
                     </div>
                 ))
             }
             </div>
-            <div className="webcam-container">
-                <img src={stretchingSteps[step]?.img}/>
-                <WebCam onResults={currAction}/>
-                <h1>{ sec }</h1>
-                <h1>{ stretchingSteps[step]?.text }</h1>
+            <div className="stretching-webcam-container">
+                <div className="stretching-webcam-wrapper">
+                    <WebCam onResults={currAction}/>
+                </div>
+                <div className="curr-stretching-info-wrapper">
+                    {
+                        alertText &&
+                        <div className="stretching-alert-text" id={correctPose ? 'correct' : 'incorrect'}>
+                            { alertText }
+                        </div>
+                    }
+                    <div className="curr-stretching-info">
+                        <img src={stretchingSteps[step]?.img}/>
+                        { correctPose && <div className="second">{ sec }</div> }
+                        <div className="curr-stretching-description">{ stretchingSteps[step]?.text }</div>
+                    </div>
+                </div>
+
             </div>
         </div>
     )

@@ -47,23 +47,11 @@ function StretchingWebCam({ onResults }) {
     }, [webcamRef, webcamRef.current, onResults]);
 
     return (
-      <div className="webcam-container"
-      >
-        <div className="webcam-status-wrapper">
-          <WebCam 
-            autio={"false"}
-            ref={webcamRef}
-            mirrored={true}
-          />
-          {/* {
-            !faceDetected &&
-            <div className="post-not-detected">
-              <div className="warning-title">자세가 감지되지 않습니다</div>
-              <div>화면에 얼굴이 잘 나오는 지 확인해주세요</div>
-            </div>
-          } */}
-        </div>
-      </div>
+      <WebCam 
+        autio={"false"}
+        ref={webcamRef}
+        mirrored={true}
+      />
     )
 }
 export default StretchingWebCam;
