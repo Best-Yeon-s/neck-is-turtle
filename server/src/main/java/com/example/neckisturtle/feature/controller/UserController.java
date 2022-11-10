@@ -2,25 +2,20 @@ package com.example.neckisturtle.feature.controller;
 
 import com.example.neckisturtle.feature.Oauth.UserDto;
 import com.example.neckisturtle.feature.dto.UserInfoDto;
+import com.example.neckisturtle.feature.dto.UserUpdateDto;
 import com.example.neckisturtle.feature.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-
-import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
 @RestController
 @RequestMapping("/api/v1/user")
 @Slf4j
-public class user {
+public class UserController {
 
     private final UserService userService;
 
-    public user(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -35,7 +30,7 @@ public class user {
     }
 
     @GetMapping("/user-info")
-    public UserInfoDto getUserInfo(@RequestHeader(value="Authorization") String autha, Authentication authentication, Authentication auth){
+    public UserInfoDto getUserInfo(@RequestHeader(value="Authorization") String Authorization){
 
         UserDto userDto = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userService.getUserInfo(userDto.getName());
@@ -52,7 +47,8 @@ public class user {
     }
 
     @PutMapping("/straight-ratio")
-    public String setStraightRatio(){
-        return "setStraightRatio";
+    public String setStraightRatio(@RequestHeader(value="Authorization") String Authorization, @ModelAttribute(name = "update")UserUpdateDto.setStraightRatioDto straightDto){
+        UserDto userDto = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userService.setStraightRatio(userDto.getName(), straightDto.getStraightRatio());
     }
 }

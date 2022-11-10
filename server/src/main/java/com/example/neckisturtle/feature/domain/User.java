@@ -28,6 +28,9 @@ public class User {
     private String image_url;
 
     @Column
+    private Float straight_ratio;
+
+    @Column
     private String access_token;
 
     @Column
@@ -42,5 +45,8 @@ public class User {
     @Column
     private String sns_type_code;
 
+    public void setStraightRatio(float ratio) {
+        this.straight_ratio = ratio;
+    }
 }
 

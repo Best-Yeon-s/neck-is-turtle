@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
 public class TokenService{
     private String secretKey = "token-secret-key-neck-is-turtle, token-secret-key-neck-is-turtle, token-secret-key-neck-is-turtle ";
 
@@ -28,8 +27,6 @@ public class TokenService{
 
         //Claims claims = Jwts.claims().setSubject(uid);
         //claims.put("role", role);
-        log.info("UID ::", uid);
-
         Date now = new Date();
         return new Token(
                 Jwts.builder()
