@@ -8,10 +8,11 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class TokenService{
     private String secretKey = "token-secret-key-neck-is-turtle, token-secret-key-neck-is-turtle, token-secret-key-neck-is-turtle ";
 
@@ -21,19 +22,24 @@ public class TokenService{
     }
 
 
-    public Token generateToken(OAuth2User oAuth2User) {
+    public Token generateToken(String uid, String role) {
         long tokenPeriod = 1000L * 60L * 10L;
         long refreshPeriod = 1000L * 60L * 60L * 24L * 30L * 3L;
-        Date now = new Date();
 
+        //Claims claims = Jwts.claims().setSubject(uid);
+        //claims.put("role", role);
+        log.info("UID ::", uid);
+
+        Date now = new Date();
         return new Token(
                 Jwts.builder()
-                        .setSubject(oAuth2User.getAttribute("email"))
+                        .setSubject(uid)
                         .setIssuedAt(now)
                         .setExpiration(new Date(now.getTime() + tokenPeriod))
                         .signWith(SignatureAlgorithm.HS256, secretKey)
                         .compact(),
                 Jwts.builder()
+                        .setSubject(uid)
                         .setIssuedAt(now)
                         .setExpiration(new Date(now.getTime() + refreshPeriod))
                         .signWith(SignatureAlgorithm.HS256, secretKey)

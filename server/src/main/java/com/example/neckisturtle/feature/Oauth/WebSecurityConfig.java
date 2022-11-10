@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import com.example.neckisturtle.feature.service.UserService;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -14,25 +15,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomOAuth2UserService oAuth2UserService;
-    private final CustomUserDetailService customUserDetailService;
     private final OAuth2SuccessHandler successHandler;
     private final TokenService tokenService;
+    private final UserService userService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
-                .and()
                 .authorizeRequests()
-                .mvcMatchers( "/api/v1/user/signin").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/user").authenticated()
                 .and()
-                .oauth2Login()
-                .userInfoEndpoint().userService(customUserDetailService)
-                .and()
-                .defaultSuccessUrl("/api/v1/user/signin")
-                .failureUrl("/fail");
+                .addFilterBefore(new JwtAuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class)
+                .oauth2Login().loginPage("/token/expired")
+                .successHandler(successHandler)
+                .userInfoEndpoint().userService(oAuth2UserService);
 
+        http.addFilterBefore(new JwtAuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class);
     }
 }

@@ -1,19 +1,32 @@
 package com.example.neckisturtle.feature.controller;
 
+import com.example.neckisturtle.feature.Oauth.UserDto;
+import com.example.neckisturtle.feature.dto.UserInfoDto;
 import com.example.neckisturtle.feature.service.UserService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static org.springframework.security.core.context.SecurityContextHolder.getContext;
 
 @RestController
 @RequestMapping("/api/v1/user")
+@Slf4j
 public class user {
 
-    private UserService userService;
+    private final UserService userService;
+
+    public user(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/signin")
-    public Object signIn(OAuth2User oAuth2User){
-        return ResponseEntity.ok(userService.signin(oAuth2User));
+    public String signIn(){
+        return "signIn";
     }
 
     @PostMapping("/signup")
@@ -22,8 +35,10 @@ public class user {
     }
 
     @GetMapping("/user-info")
-    public String getUserInfo(){
-        return "getUserInfo";
+    public UserInfoDto getUserInfo(@RequestHeader(value="Authorization") String autha, Authentication authentication, Authentication auth){
+
+        UserDto userDto = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userService.getUserInfo(userDto.getName());
     }
 
     @PostMapping("/profile-image")

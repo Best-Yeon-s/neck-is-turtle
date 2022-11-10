@@ -1,5 +1,6 @@
 package com.example.neckisturtle.feature.Oauth;
 
+import com.example.neckisturtle.feature.domain.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import com.example.neckisturtle.feature.persistance.UserRepo;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,19 +23,30 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     private final TokenService tokenService;
     private final UserRequestMapper userRequestMapper;
     private final ObjectMapper objectMapper;
+    private final UserRepo userRepo;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
         OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
-        UserDto userDto = userRequestMapper.toDto(oAuth2User);
 
         log.info("Principal에서 꺼낸 OAuth2User = {}", oAuth2User);
         // 최초 로그인이라면 회원가입 처리를 한다.
-        String targetUrl;
+        if (!userRepo.existsByEmail(oAuth2User.getAttribute("email"))){
+            User user = User.builder()
+                    .email(oAuth2User.getAttribute("email"))
+                    .name(oAuth2User.getAttribute("name"))
+                    .image_url(oAuth2User.getAttribute("picture"))
+                    .build();
+            userRepo.save(user);
+        }
+
+        log.info("이 유저가 존재 하는지 {}", userRepo.existsByEmail("sunkite3030@khu.ac.kr"));
+
+//      String targetUrl;
         log.info("토큰 발행 시작");
 
-        Token token = tokenService.generateToken(oAuth2User);
+        Token token = tokenService.generateToken(oAuth2User.getAttribute("email"), "USER");
         log.info("{}", token);
 //        targetUrl = UriComponentsBuilder.fromUriString("/home")
 //                .queryParam("token", "token")
