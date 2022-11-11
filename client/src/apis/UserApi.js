@@ -8,12 +8,16 @@ class UserApi {
     * 현재 저장된 토큰으로 유저 정보를 받아옴
     */
     getUserInfo = async () => {
-        store.dispatch(setAuth(false));
-
         try {
-
+            const res = await get('/user/user-info');
+            store.dispatch(setAuth(true));
+            store.dispatch(setName(res.data.name));
+            store.dispatch(setEmail(res.data.email));
+            store.dispatch(setPicture(res.data.picture));
+            store.dispatch(setShowLoginModal(false));
         } catch(err) {
             store.dispatch(setAuth(false));
+            store.dispatch(setShowLoginModal(true));
         }
     }
 
@@ -31,8 +35,7 @@ class UserApi {
         } else { // 존재하지 않는 유저일 경우
             token = await this.signUp(email, name, picture);
         }
-
-        // localStorage.setItem('token', token);
+        localStorage.setItem('token', token);
         store.dispatch(setName(name));
         store.dispatch(setEmail(email));
         store.dispatch(setPicture(picture));
@@ -46,11 +49,19 @@ class UserApi {
     }
 
     signIn = async (email) => { // 로그인
-
+        const res = await post('/user/signin', {
+            email: email
+        });
+        return res.data;
     }
 
     signUp = async (email, name, picture) => { // 회원가입
-        
+        const res = await post('/user/signup', {
+            email: email,
+            name: name,
+            picture: picture
+        });
+        return res.data;
     }
 }
 export default UserApi;

@@ -10,20 +10,11 @@ import Stretching from './components/stretching';
 
 function App() {
   const userApi = new UserApi();
-  const auth = useSelector(state=>state.userData.auth);
   const showLogin = useSelector(state=>state.modal.showLogin);
 
   useEffect(()=>{
     userApi.getUserInfo();
   }, [])
-
-  useEffect(()=>{
-    console.log("auth", auth)
-  },[auth])
-
-  useEffect(()=>{
-    console.log(showLogin);
-  }, [showLogin])
 
   return (
     <div className="App">

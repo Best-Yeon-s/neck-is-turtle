@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore, compose, combineReducers } from "redux";
+import { applyMiddleware, legacy_createStore, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { userDataReducer } from './userData/userDataReducer';
 import { modalReducer } from "./modal/modalReducer";
@@ -8,11 +8,11 @@ const rootReducer = combineReducers({
     modal: modalReducer,
 })
 
-const middleware = [thunk];
-const composeEnhancers = compose(applyMiddleware(...middleware));   
+// const middleware = [thunk];
+// const composeEnhancers = compose(applyMiddleware(...middleware));   
 
 const configureStore = () => {
-    return createStore(rootReducer, composeEnhancers);
+    return legacy_createStore(rootReducer /*, composeEnhancers*/);
 };
 
 const store = configureStore();
