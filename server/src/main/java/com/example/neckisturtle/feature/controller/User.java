@@ -22,6 +22,11 @@ public class User {
         this.userService = userService;
     }
 
+    @GetMapping("/exist/{email}")
+    public boolean signUp(@PathVariable(name = "email") String email){
+        return userService.isExistUser(email);
+    }
+
     @PostMapping("/signin")
     public String signIn(@RequestBody SigninDto dto){
         return userService.signIn(dto);

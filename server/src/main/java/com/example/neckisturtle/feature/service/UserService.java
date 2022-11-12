@@ -27,6 +27,10 @@ public class UserService {
         this.tokenService = tokenService;
     }
 
+    public boolean isExistUser(String email){
+        return userRepo.existsByEmail(email);
+    }
+
     public Optional<User> findByEmail(String email) { return userRepo.findByEmail(email); }
 
     public UserInfoDto getUserInfo(String name) {
