@@ -1,6 +1,9 @@
 // install (please make sure versions match peerDependencies)
 // yarn add @nivo/core @nivo/bar
 import { ResponsiveBar } from '@nivo/bar'
+import { useEffect } from 'react';
+import { useState } from 'react'
+import PoseApi from '../../../apis/PoseApi';
 
 let data = [
     {
@@ -40,9 +43,32 @@ let data = [
     }
 ]
 
-const PoseTimeStackChart = ({ /* see data tab */ }) => (
+const PoseTimeStackChart = ({}) => {
+    const poseApi = new PoseApi();
+    const [poseWeekData, setPoseWeekData] = useState([]);
+
+    useEffect(()=>{
+        const getPoseWeekData = async () => {
+            const res = await poseApi.getWeekPose();
+            let tempPoseWeekData = [];
+            for (let poseInfo of res) {
+                const dateInfo = poseInfo.regDtm.split('T')[0];
+                const straightRatio = parseInt(poseInfo.straightTime / (poseInfo.straightTime + poseInfo.turtleTime) * 100);
+                const turtleRatio = parseInt(poseInfo.turtleTime / (poseInfo.straightTime + poseInfo.turtleTime) * 100);
+                tempPoseWeekData.push({
+                    date: dateInfo,
+                    "바른 자세": straightRatio,
+                    "거북목": turtleRatio
+                })
+            }
+            setPoseWeekData(tempPoseWeekData);
+        }
+        getPoseWeekData();
+    }, [])
+
+    return (
     <ResponsiveBar
-        data={data}
+        data={poseWeekData}
         keys={[
             '바른 자세',
             '거북목',
@@ -156,5 +182,5 @@ const PoseTimeStackChart = ({ /* see data tab */ }) => (
         ariaLabel="Nivo bar chart demo"
         barAriaLabel={function(e){return e.id+": "+e.formattedValue+" in date: "+e.indexValue}}
     />
-)
+)}
 export default PoseTimeStackChart;

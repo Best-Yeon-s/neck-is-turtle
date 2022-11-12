@@ -11,10 +11,6 @@ function Home() {
     const straightTime = useSelector(state=>state.pose.straightTime);
     const turtleTime = useSelector(state=>state.pose.turtleTime);
 
-    useEffect(()=>{
-        console.log(straightTime);
-    }, [straightTime])
-
     const savePoseTime = async (e) => {
         await poseApi.setTodayStraightTime(straightTime);
         await poseApi.setTodayTurtleTime(turtleTime);

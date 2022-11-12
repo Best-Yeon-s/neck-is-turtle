@@ -32,5 +32,10 @@ class PoseApi {
         });
         console.log('turtle',time);
     }
+
+    getWeekPose = async () => {
+        const res = await get('pose/pose/week');
+        return res.data;
+    }
 }
 export default PoseApi;
