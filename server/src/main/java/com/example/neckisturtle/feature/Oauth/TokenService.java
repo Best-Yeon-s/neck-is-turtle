@@ -8,10 +8,13 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@NoArgsConstructor
 public class TokenService{
     private String secretKey = "token-secret-key-neck-is-turtle, token-secret-key-neck-is-turtle, token-secret-key-neck-is-turtle ";
 

@@ -1,6 +1,8 @@
 package com.example.neckisturtle.feature.Oauth;
 
 import java.util.Map;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 

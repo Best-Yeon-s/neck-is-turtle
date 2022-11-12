@@ -19,16 +19,23 @@ public class MissionRecord {
     private Integer id;
 
     @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "userId")
-    private User user_id;
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private User userId;
 
     @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn(name = "mission_id", referencedColumnName = "mission_id")
-    private Mission mission_id;
+    @JoinColumn(name = "missionId", referencedColumnName = "mission_id")
+    private Mission missionId;
+
+    @Column(length = 1)
+    private String completeYn;
 
     @Column
-    private Date reg_dtm;
+    private Date regDtm;
 
     @Column
-    private Date complete_dtm;
+    private Date completeDtm;
+
+    public void setComplateYn(String Yn) {
+        this.completeYn = Yn;
+    }
 }

@@ -48,5 +48,9 @@ public class User {
     public void setStraightRatio(float ratio) {
         this.straight_ratio = ratio;
     }
+    public void setAccess_token(String token) {
+        this.access_token = token;
+    }
+
 }
 

@@ -1,6 +1,8 @@
 package com.example.neckisturtle.feature.controller;
 
 import com.example.neckisturtle.feature.Oauth.UserDto;
+import com.example.neckisturtle.feature.dto.SigninDto;
+import com.example.neckisturtle.feature.dto.SignupDto;
 import com.example.neckisturtle.feature.dto.UserInfoDto;
 import com.example.neckisturtle.feature.dto.UserUpdateDto;
 import com.example.neckisturtle.feature.service.UserService;
@@ -10,23 +12,23 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/user")
+@CrossOrigin
 @Slf4j
-public class UserController {
+public class User {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public User(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping("/signin")
-    public String signIn(){
-        return "signIn";
+    public String signIn(@RequestBody SigninDto dto){
+        return userService.signIn(dto);
     }
-
     @PostMapping("/signup")
-    public String signUp(){
-        return "signUp";
+    public String signUp(@RequestBody SignupDto dto){
+        return userService.signUp(dto);
     }
 
     @GetMapping("/user-info")

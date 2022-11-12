@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.example.neckisturtle.feature.domain.User;
 import com.example.neckisturtle.feature.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +20,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Slf4j
 class JwtAuthFilter extends GenericFilterBean {
     private final TokenService tokenService;

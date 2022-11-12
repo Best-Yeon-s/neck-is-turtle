@@ -1,5 +1,6 @@
 package com.example.neckisturtle.feature.Oauth;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,7 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import com.example.neckisturtle.feature.service.UserService;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,12 +20,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final TokenService tokenService;
     private final UserService userService;
 
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/user").authenticated()
+                .antMatchers("/user/signup").permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login().loginPage("/token/expired")

@@ -1,6 +1,5 @@
 package com.example.neckisturtle.feature.controller;
 
-import com.example.neckisturtle.feature.Oauth.Token;
 import com.example.neckisturtle.feature.Oauth.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
 @RestController
-public class TokenController {
+@CrossOrigin
+public class Token {
     private final TokenService tokenService;
 
     @GetMapping("/token/expired")
@@ -24,7 +24,7 @@ public class TokenController {
 
         if (token != null && tokenService.verifyToken(token)) {
             String email = tokenService.getUid(token);
-            Token newToken = tokenService.generateToken(email, "USER");
+            com.example.neckisturtle.feature.Oauth.Token newToken = tokenService.generateToken(email, "USER");
 
             response.addHeader("Auth", newToken.getToken());
             response.addHeader("Refresh", newToken.getRefreshToken());

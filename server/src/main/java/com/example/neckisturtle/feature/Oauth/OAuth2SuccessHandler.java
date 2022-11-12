@@ -2,6 +2,7 @@ package com.example.neckisturtle.feature.Oauth;
 
 import com.example.neckisturtle.feature.domain.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import com.example.neckisturtle.feature.persistance.UserRepo;
 
 @Slf4j
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Component
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final TokenService tokenService;

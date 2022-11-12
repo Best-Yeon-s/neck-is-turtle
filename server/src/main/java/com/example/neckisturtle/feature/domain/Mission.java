@@ -1,6 +1,7 @@
 package com.example.neckisturtle.feature.domain;
 
 import lombok.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,7 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "tb_mission")
 @Entity
-
 public class Mission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +25,6 @@ public class Mission {
     private String description;
 
     @Column
-    private Date reg_dtm;
+    private Date regDtm;
+
 }
