@@ -35,7 +35,7 @@ function MeasurePose({  }) {
     }
 
     const onResults = (results) => {
-      if (results.poseLandmarks?.length || !results.poseLandmarks[7]) {
+      if (results.poseLandmarks?.length && results.poseLandmarks[7]) {
         setFaceDetected(true);
         const faceWidth = getDistance(results.poseLandmarks[7], results.poseLandmarks[8]);
         const shoulderWidth = getDistance(results.poseLandmarks[11], results.poseLandmarks[12]);

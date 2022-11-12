@@ -8,6 +8,6 @@ const poseApi = new PoseApi();
 
 export const checkAuth = async () => {
     await userApi.getUserInfo();
-    await missionApi.getTodayCompletedMission();
     await poseApi.getTodayPose();
+    await missionApi.getTodayCompletedMission();
 }
