@@ -15,6 +15,12 @@ export const poseReducer = (state = initialState, action) => {
     case ACTION_TYPES.SET_TURTLE_TIME:
       resultState.turtleTime = action.data;
       break;
+    case ACTION_TYPES.DETECT_STRAIGHT:
+      resultState.straightTime += 1;
+      break;
+    case ACTION_TYPES.DETECT_TURTLE:
+      resultState.turtleTime += 1;
+      break;
     default:
   }
 

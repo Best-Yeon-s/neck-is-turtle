@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import usePushNotification  from "../hooks/usePushNotification";
+import { detectStraight, detectTurtle } from "../redux/pose/poseAction";
 
 function PoseStatusHandler({ status }) {
+    const dispatch = useDispatch();
     const [straightSec, setStraightSec] = useState(0);
     const [turtleSec, setTurtleSec] = useState(0);
     const {fireNotification} = usePushNotification();
@@ -18,6 +21,7 @@ function PoseStatusHandler({ status }) {
             switch(status) {
                 case 'TURTLE':
                     setTurtleSec(time.current);
+                    dispatch(detectTurtle());
 
                     if (time.current == 10) {
                         fireNotification('자세를 고쳐 앉으세요', 'WARNING');
@@ -25,6 +29,7 @@ function PoseStatusHandler({ status }) {
                     break;
                 case 'STRAIGHT':
                     setStraightSec(time.current);
+                    dispatch(detectStraight());
 
                     if (time.current == 100) {
                         fireNotification('바른 자세를 잘 유지하고 있네요!', 'CORRECT');

@@ -13,12 +13,12 @@ const TodayPostureChart = ({  /* see data tab */ }) => {
             {
                 "id": "바른 자세",
                 "label": "바른 자세",
-                "value": straightTime / (straightTime + turtleTime) * 100,
+                "value": Math.round(straightTime / (straightTime + turtleTime) * 100),
             },
             {
                 "id": "turtle",
                 "label": "거북목 자세",
-                "value": turtleTime / (straightTime + turtleTime) * 100,
+                "value": Math.round(turtleTime / (straightTime + turtleTime) * 100),
             },
         ])
     }, [straightTime, turtleTime])
