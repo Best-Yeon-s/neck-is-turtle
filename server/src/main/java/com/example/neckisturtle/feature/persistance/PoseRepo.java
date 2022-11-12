@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface PoseRepo extends JpaRepository<Pose, Integer> {
     boolean existsByRegDtmAndUserId(Date regDtm, User userId);
 
-    List<Pose> findByRegDtmBetweenOrderByRegDtm(Date start, Date end);
+    List<Pose> findByRegDtmBetweenAndUserIdOrderByRegDtm(Date start, Date end, User userId);
 
 
     Optional<Pose> findByRegDtmAndUserId(Date regDtm, User userId);

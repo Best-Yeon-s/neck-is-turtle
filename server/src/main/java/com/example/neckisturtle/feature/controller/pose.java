@@ -50,7 +50,7 @@ public class pose {
         return poseService.modifyTodayTurtlePose(dto, userDto.getEmail());
     }
 
-    @GetMapping("/pose/week")
+    @GetMapping("/week")
     public List<WeekPoseDto> getWeekPose(@RequestHeader(value="Authorization") String Authorization){
         UserDto userDto = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return poseService.getWeekPose(userDto.getEmail());

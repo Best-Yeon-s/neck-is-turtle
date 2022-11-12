@@ -8,10 +8,10 @@ import lombok.Getter;
 import java.util.Date;
 @Getter
 public class MissionDto {
-    private Integer id;
+    private Mission missionId;
 
     @Builder
-    public MissionDto(Integer id) {
-        this.id = id;
+    public MissionDto(Mission mission) {
+        this.missionId = mission;
     }
 }

@@ -38,4 +38,6 @@ public class MissionRecord {
     public void setComplateYn(String Yn) {
         this.completeYn = Yn;
     }
+
+    public void setCompleteDtm(Date date) {this.completeDtm = date;}
 }

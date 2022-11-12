@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class MissionService {
 
 //            List<MissionRecord> mission = missionRecordRepo.findAllByUserId(user);
             List<MissionDto> collect = mission.stream()
-                    .map(m-> new MissionDto(m.getId()))
+                    .map(m-> new MissionDto(m.getMissionId()))
                     .collect(Collectors.toList());
 
             return collect;
@@ -64,15 +65,19 @@ public class MissionService {
 
     public String missionSuccess(Integer missionId, String email){
         try{
+            Date today = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");   // yyyy-MM-dd HH:mm:ss
+            String format = formatter.format(today);
+
             User user = userRepo.findByEmail(email).orElseThrow();
             Mission amission = missionRepo.findById(missionId).orElseThrow();
 
             MissionRecord mission = missionRecordRepo.findByMissionIdAndUserId(amission, user).orElseThrow();
             mission.setComplateYn("Y");
+            mission.setCompleteDtm(new SimpleDateFormat("yyyy-MM-dd").parse(format));
             missionRecordRepo.save(mission);
-
             return "성공";
-        }catch (Error e){
+        }catch (Exception e) {
             log.info("error : {}", e);
             return "실패";
         }

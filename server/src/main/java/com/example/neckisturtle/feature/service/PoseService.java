@@ -168,9 +168,10 @@ public class PoseService {
 
             User user = userRepo.findByEmail(email).orElseThrow();
 
-            List<Pose> poses = poseRepo.findByRegDtmBetweenOrderByRegDtm(
+            List<Pose> poses = poseRepo.findByRegDtmBetweenAndUserIdOrderByRegDtm(
                     new SimpleDateFormat("yyyy-MM-dd").parse(startDay),
-                    new SimpleDateFormat("yyyy-MM-dd").parse(endDay));
+                    new SimpleDateFormat("yyyy-MM-dd").parse(endDay),
+                    user);
 
             List<WeekPoseDto> collect = poses.stream()
                     .map(m-> new WeekPoseDto(m.getRegDtm(), m.getStraightTime(), m.getTurtleTime()))
