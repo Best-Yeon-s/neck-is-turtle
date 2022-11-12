@@ -2,6 +2,7 @@
 
 .mission-container {
     width: calc(100% - rem(30));
+    height: 100%;
     text-align: left;
     flex-grow: 1;
     padding: rem(15);
@@ -21,8 +22,8 @@
         display: flex;
         flex-direction: column;
         gap: rem(10);
-        max-height: calc(100% - rem(25));
-        overflow: scroll;
+        flex-grow: 1;
+        overflow: auto;
 
         .mission-elem {
             display: flex;
