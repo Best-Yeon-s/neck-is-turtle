@@ -2,10 +2,12 @@ import { applyMiddleware, legacy_createStore, compose, combineReducers } from "r
 import thunk from "redux-thunk";
 import { userDataReducer } from './userData/userDataReducer';
 import { modalReducer } from "./modal/modalReducer";
+import { missionReducer } from "./mission/missionReducer";
 
 const rootReducer = combineReducers({
     userData: userDataReducer,
     modal: modalReducer,
+    mission: missionReducer,
 })
 
 // const middleware = [thunk];
