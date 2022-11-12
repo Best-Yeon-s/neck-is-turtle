@@ -4,14 +4,16 @@ import com.example.neckisturtle.feature.domain.Mission;
 import com.example.neckisturtle.feature.domain.User;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 @Getter
+@NoArgsConstructor
 public class MissionDto {
-    private Mission missionId;
+    private Integer missionId;
 
     @Builder
-    public MissionDto(Mission mission) {
+    public MissionDto(Integer mission) {
         this.missionId = mission;
     }
 }

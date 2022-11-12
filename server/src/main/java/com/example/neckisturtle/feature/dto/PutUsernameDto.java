@@ -1,16 +1,15 @@
 package com.example.neckisturtle.feature.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
 @Getter
-public class PutUsernamaeDto {
+public class PutUsernameDto {
     private String name;
 
     @Builder
-    public PutUsernamaeDto(String name) {
+    public PutUsernameDto(String name) {
         this.name = name;
     }
 }

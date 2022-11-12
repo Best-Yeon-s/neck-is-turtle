@@ -52,5 +52,7 @@ public class User {
         this.access_token = token;
     }
 
+    public void setName(String name){this.name = name; }
+
 }
 

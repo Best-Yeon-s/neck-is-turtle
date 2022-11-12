@@ -1,10 +1,7 @@
 package com.example.neckisturtle.feature.controller;
 
 import com.example.neckisturtle.feature.Oauth.UserDto;
-import com.example.neckisturtle.feature.dto.SigninDto;
-import com.example.neckisturtle.feature.dto.SignupDto;
-import com.example.neckisturtle.feature.dto.UserInfoDto;
-import com.example.neckisturtle.feature.dto.UserUpdateDto;
+import com.example.neckisturtle.feature.dto.*;
 import com.example.neckisturtle.feature.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,8 +46,9 @@ public class User {
     }
 
     @PutMapping("/name")
-    public String modifyName(){
-        return "modifyName";
+    public String modifyName(@RequestHeader(value="Authorization") String Authorization, @ModelAttribute(name = "update")PutUsernameDto nameDto){
+        UserDto userDto = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userService.modifyName(userDto.getEmail(), nameDto.getName());
     }
 
     @PutMapping("/straight-ratio")

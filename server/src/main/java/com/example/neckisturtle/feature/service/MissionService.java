@@ -50,9 +50,10 @@ public class MissionService {
             List<MissionRecord> mission = missionRecordRepo.findAllByCompleteDtmAndUserId(
                     new SimpleDateFormat("yyyy-MM-dd").parse(format), user);
 
-//            List<MissionRecord> mission = missionRecordRepo.findAllByUserId(user);
+            List<MissionRecord> amission = missionRecordRepo.findAllByUserId(user);
+
             List<MissionDto> collect = mission.stream()
-                    .map(m-> new MissionDto(m.getMissionId()))
+                    .map(m-> new MissionDto(m.getMissionId().getMission_id()))
                     .collect(Collectors.toList());
 
             return collect;

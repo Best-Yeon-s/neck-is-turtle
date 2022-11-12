@@ -45,7 +45,6 @@ public class UserService {
             User user = userRepo.findByName(name.toString()).orElseThrow();
             user.setStraightRatio(ratio);
             userRepo.save(user);
-
             return "성공";
         }catch (Error e){
             log.info("error : {}", e);
@@ -83,6 +82,18 @@ public class UserService {
             }
         }else{
             return "존재하지 않는 유저입니다.";
+        }
+    }
+
+    public String modifyName(String email, String name){
+        try{
+            User user = userRepo.findByEmail(email).orElseThrow();
+            user.setName(name);
+            userRepo.save(user);
+            return "성공";
+        }catch (Exception e){
+            log.info("error : {}", e);
+            return "실패";
         }
     }
 }
