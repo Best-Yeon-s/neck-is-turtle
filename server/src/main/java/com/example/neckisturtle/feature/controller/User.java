@@ -23,7 +23,7 @@ public class User {
     }
 
     @GetMapping("/exist/{email}")
-    public boolean signUp(@PathVariable(name = "email") String email){
+    public boolean isExistUser(@PathVariable(name = "email") String email){
         return userService.isExistUser(email);
     }
 

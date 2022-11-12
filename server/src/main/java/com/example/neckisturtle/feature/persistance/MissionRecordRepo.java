@@ -1,5 +1,6 @@
 package com.example.neckisturtle.feature.persistance;
 
+import com.example.neckisturtle.feature.domain.Mission;
 import com.example.neckisturtle.feature.domain.MissionRecord;
 import com.example.neckisturtle.feature.domain.Pose;
 import com.example.neckisturtle.feature.domain.User;
@@ -20,6 +21,8 @@ public interface MissionRecordRepo extends JpaRepository<MissionRecord, Integer>
     List<MissionRecord> findAllByUserId(User userId);
 
     Optional<MissionRecord> findById(Integer Id);
+
+    Optional<MissionRecord> findByMissionIdAndUserId(Mission missionId, User userId);
 
     List<MissionRecord> findByCompleteDtmBetweenOrderByRegDtm(Date start, Date end);
 }

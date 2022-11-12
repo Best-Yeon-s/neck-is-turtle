@@ -31,7 +31,7 @@ public class mission {
     @PostMapping("/{missionId}")
     public String missionSuccess(@RequestHeader(value="Authorization") String Authorization, @PathVariable(name = "missionId") Integer missionId){
         UserDto userDto = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return missionService.missionSuccess(missionId);
+        return missionService.missionSuccess(missionId, userDto.getEmail());
     }
 
     @GetMapping("/3month-all")

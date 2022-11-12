@@ -2,11 +2,10 @@ package com.example.neckisturtle.feature.service;
 
 import com.example.neckisturtle.feature.domain.Mission;
 import com.example.neckisturtle.feature.domain.MissionRecord;
-import com.example.neckisturtle.feature.domain.Pose;
 import com.example.neckisturtle.feature.domain.User;
 import com.example.neckisturtle.feature.dto.MissionDto;
-import com.example.neckisturtle.feature.dto.WeekPoseDto;
 import com.example.neckisturtle.feature.persistance.MissionRecordRepo;
+import com.example.neckisturtle.feature.persistance.MissionRepo;
 import com.example.neckisturtle.feature.persistance.UserRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,9 +27,13 @@ public class MissionService {
     @Autowired
     private final MissionRecordRepo missionRecordRepo;
 
-    public MissionService(UserRepo userRepo, MissionRecordRepo missionRecordRepo) {
+    @Autowired
+    private final MissionRepo missionRepo;
+
+    public MissionService(UserRepo userRepo, MissionRecordRepo missionRecordRepo, MissionRepo missionRepo) {
         this.userRepo = userRepo;
         this.missionRecordRepo = missionRecordRepo;
+        this.missionRepo = missionRepo;
     }
 
 
@@ -60,9 +62,12 @@ public class MissionService {
         return null;
     }
 
-    public String missionSuccess(Integer missionId){
+    public String missionSuccess(Integer missionId, String email){
         try{
-            MissionRecord mission = missionRecordRepo.findById(missionId).orElseThrow();
+            User user = userRepo.findByEmail(email).orElseThrow();
+            Mission amission = missionRepo.findById(missionId).orElseThrow();
+
+            MissionRecord mission = missionRecordRepo.findByMissionIdAndUserId(amission, user).orElseThrow();
             mission.setComplateYn("Y");
             missionRecordRepo.save(mission);
 
