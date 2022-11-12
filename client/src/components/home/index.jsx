@@ -12,8 +12,7 @@ function Home() {
     const turtleTime = useSelector(state=>state.pose.turtleTime);
 
     const savePoseTime = async (e) => {
-        await poseApi.setTodayStraightTime(straightTime);
-        await poseApi.setTodayTurtleTime(turtleTime);
+        poseApi.savePoseTime(straightTime, turtleTime);
     }
 
     useEffect(()=>{

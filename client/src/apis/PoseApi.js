@@ -33,8 +33,13 @@ class PoseApi {
         console.log('turtle',time);
     }
 
+    savePoseTime = async (straightTime, turtleTime) => {
+        await this.setTodayStraightTime(straightTime);
+        await this.setTodayTurtleTime(turtleTime);
+    }
+
     getWeekPose = async () => {
-        const res = await get('pose/pose/week');
+        const res = await get('pose/week');
         return res.data;
     }
 }

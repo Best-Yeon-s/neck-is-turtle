@@ -44,6 +44,10 @@ function StretchingWebCam({ onResults }) {
           });
           camera.start();
         }
+
+        return () => {
+          pose.close();
+        }
     }, [webcamRef, webcamRef.current, onResults]);
 
     return (
