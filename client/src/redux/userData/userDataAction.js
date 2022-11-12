@@ -19,3 +19,7 @@ export const setPicture = (picture) => {
 export const setAdmin = (admin) => {
     return {type: ACTION_TYPES.SET_ADMIN, data: admin};
 }
+
+export const setStraightRatio = (ratio) => {
+    return {thpe: ACTION_TYPES.SET_STRAIGHT_RATIO, data: ratio};
+}

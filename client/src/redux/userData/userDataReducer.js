@@ -5,6 +5,7 @@ const initialState = {
     name: '',
     email: '',
     picture: null,
+    straightRatio: 0.42,
 }
 
 export const userDataReducer = (state = initialState, action) => {
@@ -25,6 +26,9 @@ export const userDataReducer = (state = initialState, action) => {
             break;
           case ACTION_TYPES.SET_PICTURE:
             resultState.picture = action.data;
+            break;
+          case ACTION_TYPES.SET_STRAIGHT_RATIO:
+            resultState.straightRatio = action.data;
             break;
       default:
     }

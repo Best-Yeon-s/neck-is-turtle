@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import UserApi from "../apis/UserApi";
 import WebCam from "react-webcam";
 import { Pose } from '@mediapipe/pose';
 import { Camera } from '@mediapipe/camera_utils';
@@ -10,13 +12,14 @@ import PoseStatusHandler from "./PoseStatusHandler";
 let camera;
 
 function MeasurePose({  }) {
+    const userApi = new UserApi();
     const webcamRef = useRef();
+    const straightRatio = useSelector(state=>state.userData.straightRatio);
     const [faceDetected, setFaceDetected] = useState(false);
     const [faceW, setFaceW] = useState(0);
     const [shoulderW, setShoulderW] = useState(0);
     const [neckDegree, setNeckDegree] = useState(0);
     const [status, setStatus] = useState('NOT_DETECTED'); // NOT_DETECTED, TURTLE, STRAIGHT
-    const [straightRatio, setStraightRatio] = useState(0.42);
     const [maxStraightRange, setMaxStraightRange] = useState(0.05);
     
     const getDistance = (p1, p2) => {
@@ -110,7 +113,7 @@ function MeasurePose({  }) {
             ref={webcamRef}
           />
           <button className="set-straight-standard">
-            <AiTwotoneSetting onClick={()=>{setStraightRatio(faceW/shoulderW)}}/>
+            <AiTwotoneSetting onClick={()=>{userApi.setStraightRatio(faceW/shoulderW)}}/>
             <div className="set-straight-standard-description">
               자세가 제대로 측정되지 않는다면<br/>
               버튼을 눌러 바른 자세 기준을 재설정해주세요!

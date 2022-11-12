@@ -3,6 +3,7 @@ export const DATA_TYPES = {
     name : 'name',
     email : 'email',
     picture : 'picture',
+    straightRatio: 'straightRatio',
 }
 
 export const ACTION_TYPES = {
@@ -10,4 +11,5 @@ export const ACTION_TYPES = {
     SET_NAME : 'SET_NAME',
     SET_EMAIL : 'SET_EMAIL',
     SET_PICTURE : 'SET_PICTURE',
+    SET_STRAIGHT_RATIO : 'SET_STRAIGHT_RATIO',
 }

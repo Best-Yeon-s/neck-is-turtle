@@ -1,6 +1,6 @@
 import { get, post, put, destroy } from './AxiosCreate';
 import store from '../redux/store';
-import { setAuth, setEmail, setName, setPicture } from '../redux/userData/userDataAction';
+import { setAuth, setEmail, setName, setPicture, setStraightRatio } from '../redux/userData/userDataAction';
 import { setShowLoginModal } from '../redux/modal/modalAction';
 
 class UserApi {
@@ -14,6 +14,7 @@ class UserApi {
             store.dispatch(setName(res.data.name));
             store.dispatch(setEmail(res.data.email));
             store.dispatch(setPicture(res.data.picture));
+            res.data.straightRatio && store.dispatch(setStraightRatio(res.data.straightRatio));
             store.dispatch(setShowLoginModal(false));
         } catch(err) {
             store.dispatch(setAuth(false));
@@ -45,7 +46,8 @@ class UserApi {
     }
 
     findUser = async (email) => {
-        return true;
+        const res = await get(`user/exist/${email}`);
+        return res.data;
     }
 
     signIn = async (email) => { // 로그인
@@ -62,6 +64,12 @@ class UserApi {
             picture: picture
         });
         return res.data;
+    }
+
+    setStraightRatio = async (ratio) => {
+        await put(`/user/straight-ratio?straightRatio=${ratio}`);
+        store.dispatch(setStraightRatio(ratio));
+        return true;
     }
 }
 export default UserApi;

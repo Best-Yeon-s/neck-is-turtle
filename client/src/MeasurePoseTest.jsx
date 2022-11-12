@@ -1,18 +1,20 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import WebCam from "react-webcam";
 import { Pose } from '@mediapipe/pose';
 import { Camera } from '@mediapipe/camera_utils';
+import UserApi from "./apis/UserApi";
 
 let camera;
 
 function MeasuerPose({  }) {
+    const userApi = new UserApi();
     const webcamRef = useRef();
+    const straightRatio = useSelector(state=>state.userData.straightRatio);
     const [hideCam, setHideCam] = useState(false);
     const [faceDetected, setFaceDetected] = useState(false);
     const [faceW, setFaceW] = useState(0);
     const [shoulderW, setShoulderW] = useState(0);
-
-    const [straightRatio, setStraightRatio] = useState(0.42);
     const [maxStraightRange, setMaxStraightRange] = useState(0.08);
 
     const getDistance = (p1, p2) => {
@@ -104,7 +106,7 @@ function MeasuerPose({  }) {
           <h3>설정값</h3>
           <div>바른 자세 기준값(얼굴/어깨) : { straightRatio.toFixed(3) }</div>
           <button
-            onClick={()=>{setStraightRatio(faceW / shoulderW)}}
+            onClick={()=>{userApi.setStraightRatio(faceW / shoulderW)}}
           >
             현재 값으로 기준값 재설정
           </button>
