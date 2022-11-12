@@ -1,19 +1,29 @@
-import { ResponsivePie } from '@nivo/pie'
+import { ResponsivePie } from '@nivo/pie';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-let data = [
-    {
-        "id": "바른 자세",
-        "label": "바른 자세",
-        "value": 84,
-    },
-    {
-        "id": "turtle",
-        "label": "거북목 자세",
-        "value": 16,
-    },
-]
+const TodayPostureChart = ({  /* see data tab */ }) => {
+    const straightTime = useSelector(state=>state.pose.straightTime);
+    const turtleTime = useSelector(state=>state.pose.turtleTime);
+    const [data, setData] = useState([])
+    
+    useEffect(()=>{
+        setData([
+            {
+                "id": "바른 자세",
+                "label": "바른 자세",
+                "value": straightTime / (straightTime + turtleTime) * 100,
+            },
+            {
+                "id": "turtle",
+                "label": "거북목 자세",
+                "value": turtleTime / (straightTime + turtleTime) * 100,
+            },
+        ])
+    }, [straightTime, turtleTime])
 
-const TodayPostureChart = ({  /* see data tab */ }) => (
+    return (
     <ResponsivePie
         data={data}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -101,5 +111,6 @@ const TodayPostureChart = ({  /* see data tab */ }) => (
             }
         ]}
     />
-)
+    )
+}
 export default TodayPostureChart;

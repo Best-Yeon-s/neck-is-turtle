@@ -8,7 +8,7 @@ function Mission() {
     const missionApi = new MissionApi();
     const auth = useSelector(state=>state.userData.auth);
     const completedMissionList = useSelector(state=>state.mission.completedMissionList);
-
+    
     const missionList = [
         { id: 1, name: '출석 체크 하기' },
         { id: 2, name: '바른자세 연속 15분 달성하기' },

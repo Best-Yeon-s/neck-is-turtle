@@ -1,7 +1,11 @@
+import { useSelector } from 'react-redux';
+import { secToString } from '../../../utils/Time';
 import Mission from '../mission';
 import TodayPostureChart from './TodayPostureChart';
 
 export function TodayChart() {
+  const straightTime = useSelector(state=>state.pose.straightTime);
+
   return (
     <div className="today-chart chart-wrapper">
         <div className="chart-title">Today</div>
@@ -12,7 +16,7 @@ export function TodayChart() {
             <div className="today-time-mission-wrapper">
               <div className="today-straight-time">
                 <div className="straight-title">바른 자세 시간</div>
-                <div className="straight-time">5h 30min</div>
+                <div className="straight-time">{ secToString(straightTime) }</div>
               </div>
               <Mission/>
             </div>
