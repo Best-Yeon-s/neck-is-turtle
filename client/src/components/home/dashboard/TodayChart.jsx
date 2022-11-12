@@ -1,12 +1,6 @@
 import Mission from '../mission';
 import TodayPostureChart from './TodayPostureChart';
 
-const missionList = [
-  { complete: false, name: '바른자세 연속 15분 달성하기' },
-  { complete: false, name: '바른 자세 시간 30분 이상 채우기' },
-  { complete: true, name: '스트레칭 하기' },
-]
-
 export function TodayChart() {
   return (
     <div className="today-chart chart-wrapper">
@@ -20,7 +14,7 @@ export function TodayChart() {
                 <div className="straight-title">바른 자세 시간</div>
                 <div className="straight-time">5h 30min</div>
               </div>
-              <Mission missionList={missionList}/>
+              <Mission/>
             </div>
         </div>
 

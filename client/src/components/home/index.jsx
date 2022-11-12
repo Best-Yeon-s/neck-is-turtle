@@ -1,8 +1,6 @@
 import Sidebar from './Sidebar';
 import Dashboard from './dashboard/index';
-import MeasuerPose from '../MeasurePose';
 import './index.scss';
-import LoginModal from '../login';
 
 function Home() {
   
@@ -10,7 +8,6 @@ function Home() {
         <div className="home">
             <Sidebar />
             <Dashboard />
-            {/* <MeasuerPose /> */}
         </div>
     )
 }
