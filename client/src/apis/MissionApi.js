@@ -5,7 +5,11 @@ import { completeMission, setCompletedMissionList } from '../redux/mission/missi
 class MissionApi {
     getTodayCompletedMission = async () => {
         const res = await get('mission/today');
-        store.dispatch(setCompletedMissionList(res.data));
+        let tempIdList = [];
+        for(let el of res.data) {
+            tempIdList.push(el.missionId);
+        }
+        store.dispatch(setCompletedMissionList(tempIdList));
     }
 
     completeMission = async (missionId) => {
