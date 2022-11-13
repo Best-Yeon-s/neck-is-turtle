@@ -4,7 +4,9 @@ import { getDegree, getDirectionVector, getMidPoint } from "../../utils/Vector";
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import MissionApi from "../../apis/MissionApi";
 import WebCam from "./WebCam";
-import step1 from "../../assets/images/neck-stretching-step1.png";
+import step1 from "../../assets/images/neck_stretching_1.jpeg";
+import step2 from "../../assets/images/neck_stretching_2.png";
+import step3 from "../../assets/images/neck_stretching_3.png";
 import './index.scss';
 
 function Stretching() {
@@ -43,7 +45,7 @@ function Stretching() {
             duration: 5,
         },
         {
-            img: step1, 
+            img: step2, 
             action: 
             function(results) {      
                 if (results.poseLandmarks?.length) {
@@ -66,7 +68,7 @@ function Stretching() {
             duration: 5,
         },
         {
-            img: step1, 
+            img: step3, 
             action: 
             function(results) {      
                 if (results.poseLandmarks?.length) {

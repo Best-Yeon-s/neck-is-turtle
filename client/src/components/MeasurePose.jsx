@@ -111,6 +111,7 @@ function MeasurePose({  }) {
           <WebCam 
             autio={"false"}
             ref={webcamRef}
+            mirrored={true}
           />
           <button className="set-straight-standard">
             <AiTwotoneSetting onClick={()=>{userApi.setStraightRatio(faceW/shoulderW)}}/>
