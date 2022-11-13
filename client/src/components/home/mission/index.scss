@@ -16,6 +16,17 @@
         font-size: rem(15);
         margin-bottom: rem(10);
         color: $GR-6;
+
+        .go-to-stretching {
+            float: right;
+            border-radius: rem(10);
+            padding: rem(5) rem(10);
+            color: $IV;
+            background-color: $RE;
+            font-size: rem(10);
+            font-weight: 600;
+            @include hoverDown(rem(-5));
+        }
     }
 
     .mission-wrapper {

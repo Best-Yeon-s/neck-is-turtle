@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import MissionElem from "./MissionElem";
 import './index.scss';
 import MissionApi from "../../../apis/MissionApi";
 
 function Mission() {
+    const navigation = useNavigate();
     const missionApi = new MissionApi();
     const auth = useSelector(state=>state.userData.auth);
     const completedMissionList = useSelector(state=>state.mission.completedMissionList);
@@ -27,7 +29,16 @@ function Mission() {
 
     return (
         <div className="mission-container">
-            <div className="mission-container-title">일일 미션</div>
+            <div className="mission-container-title">
+                일일 미션
+                <button 
+                    className="go-to-stretching"
+                    onClick={()=>{navigation('/stretching')}}
+                >
+                    스트레칭 하러 가기
+                </button>
+            </div>
+
             <div className="mission-wrapper">
             {
                 missionList.map((mission)=>(

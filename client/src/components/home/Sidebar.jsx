@@ -16,7 +16,7 @@ function Sidebar() {
             {
                 auth
                 ? <>
-                <img className="user-profile" src={auth ? userPicture : defaultProfile}/>
+                <img className="user-profile" src={userPicture ? userPicture : defaultProfile}/>
                 <div className="user-name-wrapper">
                     <div className="user-name">{ auth ? userName : "방울토망토" }</div>
                     {/* <div className="user-title">바른 자세 전문가</div> */}
