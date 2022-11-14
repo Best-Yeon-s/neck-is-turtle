@@ -2,6 +2,7 @@
 
 .mission-container {
     width: calc(100% - rem(30));
+    height: 100%;
     text-align: left;
     flex-grow: 1;
     padding: rem(15);
@@ -15,14 +16,25 @@
         font-size: rem(15);
         margin-bottom: rem(10);
         color: $GR-6;
+
+        .go-to-stretching {
+            float: right;
+            border-radius: rem(10);
+            padding: rem(5) rem(10);
+            color: $IV;
+            background-color: $RE;
+            font-size: rem(10);
+            font-weight: 600;
+            @include hoverDown(rem(-5));
+        }
     }
 
     .mission-wrapper {
         display: flex;
         flex-direction: column;
         gap: rem(10);
-        max-height: calc(100% - rem(25));
-        overflow: scroll;
+        flex-grow: 1;
+        overflow: auto;
 
         .mission-elem {
             display: flex;

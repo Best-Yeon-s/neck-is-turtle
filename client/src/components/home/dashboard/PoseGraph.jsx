@@ -1,4 +1,4 @@
-import MyResponsiveBar from './StackChart';
+import MyResponsiveBar from './PoseTimeStackChart';
 
 function PoseGraph() {
 

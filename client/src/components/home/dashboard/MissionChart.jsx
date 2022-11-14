@@ -461,18 +461,13 @@ let data = [
     }
   ]
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-const MyResponsiveTimeRange = ({ /* see data tab */ }) => (
+const MissionChart = ({ /* see data tab */ }) => (
     <ResponsiveTimeRange
         data={data}
         from="2022-06-01"
         to="2022-10-16"
         emptyColor="#eeeeee"
-        colors={[ '#D5E7B8', '#A7D489', '#e8c1a0', '#F47560' ]}
+        colors={[ '#eeeeee', '#D5E7B8', '#A7D489', '#e8c1a0', '#F47560' ]}
         margin={{ top: 40, right: 40, bottom: 100, left: 40 }}
         dayBorderWidth={2}
         dayBorderColor="#ffffff"
@@ -493,4 +488,4 @@ const MyResponsiveTimeRange = ({ /* see data tab */ }) => (
         ]}
     />
 )
-export default MyResponsiveTimeRange;
+export default MissionChart;

@@ -1,0 +1,85 @@
+@import '../../style/var.scss';
+
+.modal .login-modal {
+    width: rem(500);
+    height: rem(350);
+    padding: rem(20);
+    background: $BK;
+    border-radius: rem(20);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: $IV;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 5rem 5rem 5rem rgb(58 56 56 / 20%);
+    animation: showDown 0.5s;
+
+    .modal-header {
+        margin-bottom: rem(50);
+
+        #logo { height: rem(70); margin-bottom: rem(10); }
+
+        .modal-title {
+            font-size: rem(25);
+            font-weight: 600;
+            color: $GN-1;
+            margin: rem(15) 0;
+        }
+
+        .modal-description {
+            font-size: rem(13);
+            font-weight: 500;
+            color: $GR-3;
+        }
+    }
+
+    .hexagon-wrapper {
+        svg {
+            font-size: rem(70);
+            position: absolute;
+            color: $IV;
+            opacity: 0;
+            animation: fadeInOut 10s infinite;
+
+            &:first-child {
+                left: rem(-35);
+                bottom: rem(50);
+                color: $GR-6;
+                animation-delay: 4s;
+            }
+
+            &:nth-child(2) {
+                left: rem(3);
+                bottom: rem(-20);
+                color: $GN-1;
+            }
+
+            &:nth-child(3) {
+                left: rem(40);
+                bottom: rem(50);
+                animation-delay: 2s;
+            }
+
+            &:nth-child(4) {
+                top: rem(-20);
+                right: rem(-10);
+                animation-delay: 8s;
+                color: $GN-3;
+            }
+
+            &:nth-child(5) {
+                top: rem(47);
+                right: rem(26);
+                animation-delay: 4s;
+                color: $GN-1;
+            }
+
+            &:nth-child(6) {
+                top: rem(-20);
+                right: rem(65);
+                animation-delay: 2s;
+            }
+        }
+    }
+}

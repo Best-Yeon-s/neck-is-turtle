@@ -1,25 +1,29 @@
-import { ResponsivePie } from '@nivo/pie'
+import { ResponsivePie } from '@nivo/pie';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
+const TodayPostureChart = ({  /* see data tab */ }) => {
+    const straightTime = useSelector(state=>state.pose.straightTime);
+    const turtleTime = useSelector(state=>state.pose.turtleTime);
+    const [data, setData] = useState([])
+    
+    useEffect(()=>{
+        setData([
+            {
+                "id": "바른 자세",
+                "label": "바른 자세",
+                "value": Math.round(straightTime / (straightTime + turtleTime) * 100),
+            },
+            {
+                "id": "turtle",
+                "label": "거북목 자세",
+                "value": Math.round(turtleTime / (straightTime + turtleTime) * 100),
+            },
+        ])
+    }, [straightTime, turtleTime])
 
-let data = [
-    {
-        "id": "바른 자세",
-        "label": "바른 자세",
-        "value": 84,
-    },
-    {
-        "id": "turtle",
-        "label": "거북목 자세",
-        "value": 16,
-    },
-  ]
-
-const MyResponsivePie = ({  /* see data tab */ }) => (
+    return (
     <ResponsivePie
         data={data}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -107,5 +111,6 @@ const MyResponsivePie = ({  /* see data tab */ }) => (
             }
         ]}
     />
-)
-export default MyResponsivePie;
+    )
+}
+export default TodayPostureChart;
