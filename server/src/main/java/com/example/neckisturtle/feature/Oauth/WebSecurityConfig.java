@@ -15,8 +15,8 @@ import com.example.neckisturtle.feature.service.UserService;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final CustomOAuth2UserService oAuth2UserService;
-    private final OAuth2SuccessHandler successHandler;
+    //private final CustomOAuth2UserService oAuth2UserService;
+    //private final OAuth2SuccessHandler successHandler;
     private final TokenService tokenService;
     private final UserService userService;
 
@@ -29,12 +29,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/user").authenticated()
                 .antMatchers("/user/signup").permitAll()
+                .antMatchers("/user/kakao").permitAll()
                 .and()
-                .addFilterBefore(new JwtAuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class)
-                .oauth2Login().loginPage("/token/expired")
-                .successHandler(successHandler)
-                .userInfoEndpoint().userService(oAuth2UserService);
+                .addFilterBefore(new JwtAuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class);
+                //.oauth2Login().loginPage("/token/expired")
+                //.successHandler(successHandler)
+                //.userInfoEndpoint().userService(oAuth2UserService);
 
-        http.addFilterBefore(new JwtAuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class);
+        //http.addFilterBefore(new JwtAuthFilter(tokenService, userService), UsernamePasswordAuthenticationFilter.class);
     }
 }

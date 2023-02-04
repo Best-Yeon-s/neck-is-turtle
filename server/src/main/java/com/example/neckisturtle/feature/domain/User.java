@@ -19,6 +19,9 @@ public class User {
     private Integer userId;
 
     @Column
+    private String kakaoId;
+
+    @Column
     private String name;
 
     @Column
