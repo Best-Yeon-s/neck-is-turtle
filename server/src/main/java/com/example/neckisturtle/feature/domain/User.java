@@ -34,10 +34,10 @@ public class User {
     private Float straight_ratio;
 
     @Column
-    private String access_token;
+    private String accessToken;
 
     @Column
-    private String refresh_token;
+    private String refreshToken;
 
     @Column
     private Date reg_dtm;
@@ -52,10 +52,13 @@ public class User {
         this.straight_ratio = ratio;
     }
     public void setAccess_token(String token) {
-        this.access_token = token;
+        this.accessToken = token;
     }
 
     public void setName(String name){this.name = name; }
 
+    public void setRefresh_token(String token) {
+        this.refreshToken = token;
+    }
 }
 

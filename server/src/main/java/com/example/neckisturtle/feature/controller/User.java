@@ -1,6 +1,7 @@
 package com.example.neckisturtle.feature.controller;
 
-import com.example.neckisturtle.feature.Oauth.UserDto;
+import com.example.neckisturtle.core.resultMap;
+import com.example.neckisturtle.feature.security.UserDto;
 import com.example.neckisturtle.feature.dto.*;
 import com.example.neckisturtle.feature.service.KakaoService;
 import com.example.neckisturtle.feature.service.UserService;
@@ -31,7 +32,7 @@ public class User {
 
 
     @PostMapping("/kakao")
-    public String kakaoLogin(@RequestBody KakaoDto dto) throws IOException {
+    public resultMap kakaoLogin(@RequestBody KakaoDto dto) throws IOException {
         return kakaoService.SignupAndSignin(dto.getAccess_token());
     }
 
@@ -48,7 +49,7 @@ public class User {
     public UserInfoDto getUserInfo(@RequestHeader(value="Authorization") String Authorization){
 
         UserDto userDto = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userService.getUserInfo(userDto.getName());
+        return userService.getUserInfo(userDto.getEmail());
     }
 
     @PostMapping("/profile-image")

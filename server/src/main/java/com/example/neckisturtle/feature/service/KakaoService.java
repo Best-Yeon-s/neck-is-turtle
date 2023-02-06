@@ -1,7 +1,9 @@
 package com.example.neckisturtle.feature.service;
 
-import com.example.neckisturtle.feature.Oauth.Token;
-import com.example.neckisturtle.feature.Oauth.TokenService;
+import com.example.neckisturtle.core.resultMap;
+import com.example.neckisturtle.feature.dto.TokenDto;
+import com.example.neckisturtle.feature.security.Token;
+import com.example.neckisturtle.feature.security.TokenService;
 import com.example.neckisturtle.feature.domain.User;
 import com.example.neckisturtle.feature.persistance.UserRepo;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 @Service
 @Slf4j
@@ -23,7 +26,7 @@ public class KakaoService {
 
     @Autowired
     private final UserRepo userRepo;
-    @Autowired
+
     private final TokenService tokenService;
 
     public KakaoService(UserRepo userRepo, TokenService tokenService) {
@@ -31,7 +34,8 @@ public class KakaoService {
         this.tokenService = tokenService;
     }
 
-    public String SignupAndSignin(String access_token) throws IOException {
+    public resultMap SignupAndSignin(String access_token) throws IOException {
+        resultMap result = new resultMap();
         String host = "https://kapi.kakao.com/v2/user/me";
         String jwtToken = null;
         String accessToken = "";
@@ -47,7 +51,10 @@ public class KakaoService {
             System.out.println("responseCode = " + responseCode);
 
             if (responseCode == 401) {
-                return "없는 유저입니다";
+                result.put("status", 401);
+                result.put("success", false);
+                result.put("message", "잘못된 카카오 요청입니다. (카카오에 유저가 존재하지 않음)");
+                return result;
             }else {
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 String line = "";
@@ -75,21 +82,56 @@ public class KakaoService {
                             .email(email)
                             .name("kakaoname")
                             .image_url(profile_image)
-                            .access_token(token.getToken())
+                            .accessToken(token.getToken())
+                            .refreshToken(token.getRefreshToken())
                             .build();
                     userRepo.save(user);
-                    return token.getToken();
+                    TokenDto dto = new TokenDto(token.getToken(), token.getRefreshToken());
+
+                    result.put("status", 200);
+                    result.put("success", true);
+                    result.put("message", "회원가입 성공");
+                    result.put("data", dto);
+
+                    return result;
                 } else {
                     User user = userRepo.findByEmail(email).orElseThrow();
-                    accessToken = user.getAccess_token();
-                    if (accessToken == null || !tokenService.verifyToken(accessToken)){
-                        Token tokens = tokenService.generateToken(user.getEmail(), "USER");
-                        user.setAccess_token(tokens.getToken());
-                        userRepo.save(user);
-                        return tokens.getToken();
-                    }else {
-                        return user.getAccess_token();
-                    }
+                    Token tokens = tokenService.generateToken(user.getEmail(), "USER");
+                    user.setAccess_token(tokens.getToken());
+                    user.setRefresh_token(tokens.getRefreshToken());
+                    userRepo.save(user);
+                    TokenDto dto = new TokenDto(tokens.getToken(), user.getRefreshToken());
+
+                    result.put("status", 200);
+                    result.put("success", true);
+                    result.put("message", "로그인 성공");
+                    result.put("data", dto);
+
+                    return result;
+
+//                    accessToken = user.getAccess_token();
+//                    String refreshToken = user.getRefresh_token();
+
+//                    if (accessToken == null || !tokenService.verifyToken(accessToken)){
+//                        Token tokens = tokenService.generateToken(user.getEmail(), "USER");
+//                        user.setAccess_token(tokens.getToken());
+//                        userRepo.save(user);
+//                        TokenDto dto = new TokenDto(tokens.getToken(), user.getRefresh_token());
+//
+//                        result.put("status", 200);
+//                        result.put("success", true);
+//                        result.put("message", "성공");
+//                        result.put("data", dto);
+//
+//                        return result;
+//                    }else {
+//                        TokenDto dto = new TokenDto(user.getAccess_token(), user.getRefresh_token());
+//                        result.put("status", 200);
+//                        result.put("success", true);
+//                        result.put("message", "성공");
+//                        result.put("data", dto);
+//                        return result;
+//                    }
                 }
 
 //            result.put("id", id);

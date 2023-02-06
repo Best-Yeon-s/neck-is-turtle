@@ -1,9 +1,7 @@
 package com.example.neckisturtle.feature.controller;
 
-import com.example.neckisturtle.feature.Oauth.UserDto;
-import com.example.neckisturtle.feature.domain.MissionRecord;
+import com.example.neckisturtle.feature.security.UserDto;
 import com.example.neckisturtle.feature.dto.MissionDto;
-import com.example.neckisturtle.feature.dto.WeekPoseDto;
 import com.example.neckisturtle.feature.service.MissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

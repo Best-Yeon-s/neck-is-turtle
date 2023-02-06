@@ -1,7 +1,14 @@
 package com.example.neckisturtle.feature.controller;
 
-import com.example.neckisturtle.feature.Oauth.TokenService;
+import com.example.neckisturtle.core.resultMap;
+import com.example.neckisturtle.feature.domain.User;
+import com.example.neckisturtle.feature.persistance.UserRepo;
+import com.example.neckisturtle.feature.security.TokenService;
+import com.example.neckisturtle.feature.security.UserDto;
+import com.example.neckisturtle.feature.service.MyTokenService;
+import com.example.neckisturtle.feature.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api/v1")
 @CrossOrigin
 public class Token {
-    private final TokenService tokenService;
+    private final MyTokenService myTokenService;
+    private final UserRepo userRepo;
 
     @GetMapping("/token/expired")
     public String auth() {
@@ -19,20 +28,7 @@ public class Token {
     }
 
     @GetMapping("/token/refresh")
-    public String refreshAuth(HttpServletRequest request, HttpServletResponse response) {
-        String token = request.getHeader("Refresh");
-
-        if (token != null && tokenService.verifyToken(token)) {
-            String email = tokenService.getUid(token);
-            com.example.neckisturtle.feature.Oauth.Token newToken = tokenService.generateToken(email, "USER");
-
-            response.addHeader("Auth", newToken.getToken());
-            response.addHeader("Refresh", newToken.getRefreshToken());
-            response.setContentType("application/json;charset=UTF-8");
-
-            return "HAPPY NEW TOKEN";
-        }
-
-        throw new RuntimeException();
+    public resultMap refreshAuth(@RequestHeader(value="Refresh") String refresh, HttpServletRequest request, HttpServletResponse response) {
+        return myTokenService.refreshToken(request, response);
     }
 }
