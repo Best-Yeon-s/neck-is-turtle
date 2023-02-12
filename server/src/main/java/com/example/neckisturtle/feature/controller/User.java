@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/user")
-@CrossOrigin
+@CrossOrigin(origins ="*")
 @Slf4j
 public class User {
 

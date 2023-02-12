@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/mission")
-@CrossOrigin
+@CrossOrigin(origins ="*")
 public class mission {
     @Autowired
     private final MissionService missionService;

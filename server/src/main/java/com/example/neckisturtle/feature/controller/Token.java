@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
-@CrossOrigin
+@CrossOrigin(origins ="*")
 public class Token {
     private final MyTokenService myTokenService;
     private final UserRepo userRepo;

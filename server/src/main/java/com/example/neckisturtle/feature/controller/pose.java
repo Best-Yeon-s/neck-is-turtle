@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/pose")
-@CrossOrigin
+@CrossOrigin(origins ="*")
 public class pose {
 
     private final PoseService poseService;
