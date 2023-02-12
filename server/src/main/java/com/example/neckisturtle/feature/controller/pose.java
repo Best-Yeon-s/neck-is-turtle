@@ -1,5 +1,5 @@
 package com.example.neckisturtle.feature.controller;
-import com.example.neckisturtle.feature.Oauth.UserDto;
+import com.example.neckisturtle.feature.security.UserDto;
 import com.example.neckisturtle.feature.dto.PutStraightTimeDto;
 import com.example.neckisturtle.feature.dto.PutTurtleTimeDto;
 import com.example.neckisturtle.feature.dto.TodayPoseDto;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/pose")
-@CrossOrigin
+@CrossOrigin(origins ="*")
 public class pose {
 
     private final PoseService poseService;

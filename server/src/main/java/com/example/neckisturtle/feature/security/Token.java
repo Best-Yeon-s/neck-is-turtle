@@ -1,4 +1,4 @@
-package com.example.neckisturtle.feature.Oauth;
+package com.example.neckisturtle.feature.security;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

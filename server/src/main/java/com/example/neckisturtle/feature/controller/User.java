@@ -1,27 +1,39 @@
 package com.example.neckisturtle.feature.controller;
 
-import com.example.neckisturtle.feature.Oauth.UserDto;
+import com.example.neckisturtle.core.resultMap;
+import com.example.neckisturtle.feature.security.UserDto;
 import com.example.neckisturtle.feature.dto.*;
+import com.example.neckisturtle.feature.service.KakaoService;
 import com.example.neckisturtle.feature.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/api/v1/user")
-@CrossOrigin
+@CrossOrigin(origins ="*")
 @Slf4j
 public class User {
 
     private final UserService userService;
+    private final KakaoService kakaoService;
 
-    public User(UserService userService) {
+    public User(UserService userService, KakaoService kakaoService) {
         this.userService = userService;
+        this.kakaoService = kakaoService;
     }
 
     @GetMapping("/exist/{email}")
     public boolean isExistUser(@PathVariable(name = "email") String email){
         return userService.isExistUser(email);
+    }
+
+
+    @PostMapping("/kakao")
+    public resultMap kakaoLogin(@RequestBody KakaoDto dto) throws IOException {
+        return kakaoService.SignupAndSignin(dto.getAccess_token());
     }
 
     @PostMapping("/signin")
@@ -37,7 +49,7 @@ public class User {
     public UserInfoDto getUserInfo(@RequestHeader(value="Authorization") String Authorization){
 
         UserDto userDto = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userService.getUserInfo(userDto.getName());
+        return userService.getUserInfo(userDto.getEmail());
     }
 
     @PostMapping("/profile-image")
